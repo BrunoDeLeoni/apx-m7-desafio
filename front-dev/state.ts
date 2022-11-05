@@ -1,7 +1,10 @@
+import { Router } from "@vaadin/router"
+
 const API_BASE_URL = process.env.API_HOST
 
 /* State */
 const state = {
+    /* Data */
     data: { 
         
     },
@@ -12,30 +15,26 @@ const state = {
 
     /* Init */
     init(){
-        const localData = localStorage.getItem("data")
-        if (localData !== null) {
-            this.cleanData()
-        }
+        
     },
 
-    /* State Actual */
+    /* State: Actual */
     getState(){
         return this.data
     },
 
-    /* Set State */
+    /* State: Set New State */
     setState(newState){
         this.data = newState
         for (const callback of this.listeners) {
             callback()
         }
-        console.log("newState", this.data)
     },
 
-    /* Saved Data */
-    savedData(){
-        const currentState = this.getState();
-        localStorage.setItem("data", JSON.stringify(currentState));
+    login(username, pass){
+        if(!username && !pass){
+            return true
+        }
     },
 
     /* Subscribe */

@@ -8,25 +8,45 @@ const loginIMG = require("url:../assets/login.png")
 const instagramIMG = require("url:../assets/instagram.png")
 const githubIMG = require("url:../assets/github.png")
 const linkedinIMG = require("url:../assets/linkedin.png")
-const mapIMG = require("url:../assets/map.png")
+const titleIMG = require("url:../assets/title.png")
 
 /* Class Welcome */
 export class WelcomePage extends HTMLElement {
+
     /* Connected to CallBack */
     connectedCallback(){
         this.render()
 
-        /* Open or Close Main */
+        /* Main: Open/Close */
         const main: any = this.querySelector(".welcome__header-main-mobile")
-        const openMain = this.querySelector(".open")
-        const closeMain = this.querySelector(".back")
-        openMain?.addEventListener("click", ()=>{
+        const openMain: any = this.querySelector(".open")
+        const closeMain: any = this.querySelector(".back")
+        openMain.addEventListener("click", ()=>{
             main.style.display = "flex"
         })
-        closeMain?.addEventListener("click", ()=>{
+        closeMain.addEventListener("click", ()=>{
             main.style.display = "none"
         })
         
+        /* Login/Register: Mobile */
+        const loginMobile: any = this.querySelector(".loginMobile")
+        const registerMobile: any = this.querySelector(".registerMobile")
+        loginMobile.addEventListener("click", ()=>{
+            Router.go("/login")
+        })
+        registerMobile.addEventListener("click", ()=>{
+            Router.go("/register")
+        })
+
+        /* Login/Register: Mobile */
+        const loginDesktop: any = this.querySelector(".loginDesktop")
+        const registerDesktop: any = this.querySelector(".registerDesktop")
+        loginDesktop.addEventListener("click", ()=>{
+            Router.go("/login")
+        })
+        registerDesktop.addEventListener("click", ()=>{
+            Router.go("/register")
+        })
     }
 
     render(){
@@ -37,26 +57,28 @@ export class WelcomePage extends HTMLElement {
             <div class="welcome__header">
                 <img class="welcome__header-logo" src=${logoIMG}>
                 <img class="welcome__header-login-mobile open" src=${loginIMG}>
+                <div class="welcome__header-login-desktop">
+                    <a class="welcome__header-main-button-desktop loginDesktop">LOGIN</a>
+                    <a class="welcome__header-main-button-desktop registerDesktop">REGISTER</a>
+                </div>
             </div>
             <div class="welcome__body">
                 <div class="welcome__header-main-mobile">
-                    <a class="welcome__header-main-button-mobile login">LOGIN</a>
-                    <a class="welcome__header-main-button-mobile register">REGISTER</a>
+                    <a class="welcome__header-main-button-mobile loginMobile">LOGIN</a>
+                    <a class="welcome__header-main-button-mobile registerMobile">REGISTER</a>
                     <a class="welcome__header-main-button-mobile back">BACK</a>
                 </div>
                 <div class="welcome__body-sup">
-                    <h1 class="welcome__body-title">Where is my dog?</h1>
-                    <img class="welcome__body-map" src=${mapIMG}>
+                    <img class="welcome__body-sup-title" src=${titleIMG}>
                 </div>
                 <div class="welcome__body-inf">
-                    <h2 class="welcome__body-subtitle">What are the odds of finding a lost dog?</h2>
-                    <h5 class="welcome__body-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, nihil reprehenderit. Ut, aspernatur dolor quo eveniet a odio tenetur quaerat optio culpa minus perferendis distinctio doloremque laudantium quae, tempora hic?</h5>
+                    <h4 class="welcome__body-inf-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, nihil reprehenderit. Ut, aspernatur dolor quo eveniet a odio tenetur quaerat optio culpa minus perferendis distinctio doloremque laudantium quae, tempora hic?</h4>
                 </div>
-                </div>
+            </div>
             <div class="welcome__footer">
-            <a class="welcome__footer-link" href="http://instagram.com/brunodeleoni"><img src="${instagramIMG}"></a>
-            <a class="welcome__footer-link" href="http://github.com/brunodeleoni"><img src="${githubIMG}"></a>
-            <a class="welcome__footer-link" href="http://linkedin.com/brunobarbaradeleoni"><img src="${linkedinIMG}"></a>
+                <a class="welcome__footer-link" href="http://instagram.com/brunodeleoni"><img src="${instagramIMG}"></a>
+                <a class="welcome__footer-link" href="http://github.com/brunodeleoni"><img src="${githubIMG}"></a>
+                <a class="welcome__footer-link" href="https://ar.linkedin.com/in/bruno-barbara-de-leoni"><img src="${linkedinIMG}"></a>
             </div>
         </div>
         `
@@ -66,22 +88,23 @@ export class WelcomePage extends HTMLElement {
             font-family: 'Poppins', sans-serif;
             color: whitesmoke;
             max-width: 100%;
-            min-height: 100vh;        
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;       
         }
         
         .welcome__header{
             display: flex;
             height: 10vh;
+            width: 100%;
             padding: 20px;
-            background-color: #77777790;
+            background-color: #263238;
             align-items: center;
             justify-content: space-between;
         }
         
-        .welcome__header-logo{
-            height: 5vh;
-        }
-
+        .welcome__header-logo,
         .welcome__header-login-mobile{
             height: 5vh;
         }
@@ -91,10 +114,21 @@ export class WelcomePage extends HTMLElement {
             }
         }
 
+        .welcome__header-login-desktop{
+            display: none;
+        }
+        @media (min-width: 768px){
+            .welcome__header-login-desktop{
+                display: flex;
+                gap: 20px;
+                font-size: 20px;
+            }
+        }
+
         .welcome__header-main-mobile{
             width: 80%;
             height: 50vh;
-            background-color: #303437;
+            background-color: #263238;
             border-radius: 20px;
             flex-direction: column;
             justify-content: space-evenly;
@@ -117,18 +151,16 @@ export class WelcomePage extends HTMLElement {
 
         .welcome__body{
             min-height: 80vh;
+            width: 100%;
             padding: 20px;
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
+            justify-content: space-evenly;
             align-items: center;
         }
         @media (min-width:600px) {
             .welcome__body{
                 max-width: 600px;
-                margin: 0 auto;
-                display: flex;
-                flex-direction: column;
             }
         }
         
@@ -143,19 +175,19 @@ export class WelcomePage extends HTMLElement {
             flex-direction: column;
             text-align: center;
         }
-        
-        .welcome__body-title{
-            margin: 0 auto;
-            text-align: center;
+
+        .welcome__body-sup-title{
+            height: 35vh;
+        }
+        @media (min-width: 768px){
+            .welcome__body-sup-title{
+                height: 45vh;
+            }
         }
 
-        .welcome__body-map{
-            height: 20vh;
-        }
-
-        .welcome__body-subtitle,
-        .welcome__body-text{
+        .welcome__body-inf-text{
             margin: 0 auto;
+            padding: 5px;
         }
 
         .welcome__footer{

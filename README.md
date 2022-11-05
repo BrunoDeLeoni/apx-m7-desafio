@@ -43,3 +43,7 @@ Versión 1.1
 * Creación de Pages
 * Creación de 'router' y 'state'
 * Creación de 'welcome.ts' y '/assets'
+
+Versión 1.2
+*Estructurado Web*
+* Creación de 'home.ts', 'register.ts' y 'login.ts'
