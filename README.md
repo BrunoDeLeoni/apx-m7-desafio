@@ -37,3 +37,9 @@ Versión 1.0
 * Creación, Conexión y Sync a la base de datos en Render
 * Conexión a Algolia y Cloudinary
 
+Versión 1.1
+*Estructurado Web*
+* Estructurado del Front 
+* Creación de Pages
+* Creación de 'router' y 'state'
+* Creación de 'welcome.ts' y '/assets'
