@@ -47,3 +47,7 @@ Versión 1.1
 Versión 1.2
 *Estructurado Web*
 * Creación de 'home.ts', 'register.ts' y 'login.ts'
+
+Versión 1.3
+*Estructurado Web*
+* Creación de 'my-data' y 'my-data-update'

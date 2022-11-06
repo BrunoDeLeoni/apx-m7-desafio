@@ -1,11 +1,10 @@
 /* Imports */
-import { Route, Router } from "@vaadin/router";
+import { Router } from "@vaadin/router";
 
 /* Variables */
 const style = document.createElement("style")
 const logoIMG = require("url:../assets/logo.png")
 const signoutIMG = require("url:../assets/signout.png")
-const mapIMG = require("url:../assets/map.png")
 
 /* Class Home */
 export class HomePage extends HTMLElement {
@@ -14,10 +13,36 @@ export class HomePage extends HTMLElement {
     connectedCallback(){
         this.render()
 
+        /* Sign Out */
         const signout: any = this.querySelector(".out")
         signout.addEventListener("click", ()=>{
             Router.go("/")
         })
+
+        /* My Data */
+        const myData: any = this.querySelector(".my-data")
+        myData.addEventListener("click", ()=>{
+            Router.go("/user")
+        })
+
+        /* My Reports */
+        const myReports: any = this.querySelector(".my-reports")
+        myReports.addEventListener("click", ()=>{
+            Router.go("/reports")
+        })
+
+        /* Report */
+        const report: any = this.querySelector(".report")
+        report.addEventListener("click", ()=>{
+            Router.go("/report")
+        })
+
+        /* Reported */
+        const reported: any = this.querySelector(".reported")
+        reported.addEventListener("click", ()=>{
+            Router.go("/reported")
+        })
+
     }
 
     render(){
@@ -30,11 +55,10 @@ export class HomePage extends HTMLElement {
                 <img class="home__header-signout out" src=${signoutIMG}>
             </div>
             <div class="home__body">
-                <button class="home__body-button my-data">My Data</button>
-                <button class="home__body-button my-reports">My Reports</button>
-                <button class="home__body-button reported">Reported</button>
-                <button class="home__body-button report">Report</button>
-                <img class="home__body-img" src=${mapIMG}>
+                <button class="home__body-button my-data">MY DATA</button>
+                <button class="home__body-button my-reports">MY REPORTS</button>
+                <button class="home__body-button report">REPORT</button>
+                <button class="home__body-button reported">REPORTED</button>
             </div>
         </div>
         `
@@ -69,34 +93,37 @@ export class HomePage extends HTMLElement {
             min-height: 90vh;
             width: 100%;
             padding: 20px;
+            gap: 25px;
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
             align-items: center;
         }
-        @media (min-width: 565px){
+        @media (min-width: 500px){
             .home__body{
-                width: 400px;
+                width: 500px;
             }
         }
         @media (min-width: 768px){
             .home__body{
-                width: 500px;
+                width: 768px;
+            }
+        }
+        @media (min-width: 1024px){
+            .home__body{
+                width: 1024px;
             }
         }
 
         .home__body-button{
             width: 100%;
-            height: 80px;
+            height: 130px;
             padding: 10px;
             border: none;
+            border-radius: 10px;
             background: #607d8b;
-            color: #eeeeee;
+            color: #e0e0e0;
             font-size: 25px;
-        }
-
-        .home__body-img{
-            width: 100%;
         }
         `
         this.appendChild(style)    

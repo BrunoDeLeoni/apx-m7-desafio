@@ -145,8 +145,8 @@ export class WelcomePage extends HTMLElement {
 
         .welcome__header-main-button-mobile{
             font-family: 'Poppins';
-            font-size: 40px;
-            color: darkgray;
+            font-size: 35px;
+            color: whitesmoke;
         }
 
         .welcome__body{

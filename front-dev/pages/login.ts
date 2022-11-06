@@ -43,8 +43,8 @@ export class LoginPage extends HTMLElement {
                         <input class="login__body-input pass-input" type="password" name="password-name">
                     </label>
                     <div class="login__body-button">
-                        <button class="login__body-button-form login">Login</button>
-                        <button class="login__body-button-form back">Home</button>
+                        <button class="login__body-button-form login">LOGIN</button>
+                        <button class="login__body-button-form back">BACK</button>
                     </div>
                 </form>
             </div>
@@ -119,7 +119,7 @@ export class LoginPage extends HTMLElement {
         .login__body-button{
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 10px;
         }
 
         .login__body-button-form{
@@ -127,7 +127,7 @@ export class LoginPage extends HTMLElement {
             padding: 10px;
             border: none;
             background: #607d8b;
-            color: #eeeeee;
+            color: #e0e0e0;
             font-size: 15px;
         }
 

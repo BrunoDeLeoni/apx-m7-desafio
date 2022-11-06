@@ -35,28 +35,28 @@ export class RegisterPage extends HTMLElement {
                 </div>
                 <form class="register__body-form">
                     <label class="register__body-label username">
-                        <h3 class="register__body-title username-title">USERNAME</h6>
+                        <h3 class="register__body-title username-title">Username</h6>
                         <input class="register__body-input username-input" type="text" name="username-name">
                     </label>
                     <label class="register__body-label fullname">
-                        <h3 class="register__body-title fullname-title">FULLNAME</h6>
+                        <h3 class="register__body-title fullname-title">Fullname</h6>
                         <input class="register__body-input fullname-input" type="text" name="fullname-name">
                     </label>
                     <label class="register__body-label email">
-                        <h3 class="register__body-title email-title">E-MAIL</h6>
+                        <h3 class="register__body-title email-title">Email</h6>
                         <input class="register__body-input email-input" type="email" name="email-name">
                     </label>
                     <label class="register__body-label pass">
-                        <h3 class="register__body-title pass-title">PASSWORD</h6>
+                        <h3 class="register__body-title pass-title">Password</h6>
                         <input class="register__body-input pass-input" type="password" name="password-name">
                     </label>
                     <label class="register__body-label confirmation">
-                        <h3 class="register__body-title confirmation-title">CONFIRMATION PASSWORD</h6>
+                        <h3 class="register__body-title confirmation-title">Confirmation Password</h6>
                         <input class="register__body-input confimation-input" type="password">
                     </label>
                     <div class="register__body-button">
-                        <button class="register__body-button-form register">Register</button>
-                        <button class="register__body-button-form back">Home</button>
+                        <button class="register__body-button-form register">REGISTER</button>
+                        <button class="register__body-button-form back">BACK</button>
                     </div>
                 </form>
             </div>
@@ -141,7 +141,7 @@ export class RegisterPage extends HTMLElement {
         .register__body-button{
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 10px;
         }
 
         .register__body-button-form{
@@ -149,7 +149,7 @@ export class RegisterPage extends HTMLElement {
             padding: 10px;
             border: none;
             background: #607d8b;
-            color: #eeeeee;
+            color: #e0e0e0;
             font-size: 15px;
         }
 
