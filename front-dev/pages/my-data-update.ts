@@ -1,11 +1,12 @@
 /* Imports */
 import { Router } from "@vaadin/router";
+import { state } from "../state";
+let userUsername, userFullname, userEmail;
 
 /* Variables */
 const style = document.createElement("style")
 const backIMG = require("url:../assets/back.png")
 const signoutIMG = require("url:../assets/signout.png")
-let userUsername, userFullname, userEmail;
 
 /* Class My Data */
 export class MyDataUpdatePage extends HTMLElement {
@@ -23,33 +24,36 @@ export class MyDataUpdatePage extends HTMLElement {
         /* Back */
         const back: any = this.querySelector(".back")
         back.addEventListener("click", ()=>{
-            Router.go("/home")
+            Router.go("/user")
         })
 
         /* Save */
         const save: any = this.querySelector(".save")
         save.addEventListener("click", ()=>{
-            console.log("click-tmp-sin-acción-save")
+            console.log("Actualiza los Datos")
+            Router.go("/user")
         })
         
         /* Cancel */
         const cancel: any = this.querySelector(".cancel")
         cancel.addEventListener("click", ()=>{
+            console.log("Cancelar")
             Router.go("/user")
         })
     }
 
     render(){
         /* Temporal */
-        userUsername = "brunodeleoni"
-        userFullname = "Barbara De Leoni, Bruno"
-        userEmail = "brunobarbaradeleoni@gmail.com"
+        userUsername = state.getState().username
+        userFullname = state.getState().userFullname
+        userEmail = state.getState().userEmail
 
         this.className = "my-data"
         this.innerHTML = 
         `
         <div class="my-data-update__container">
             <div class="my-data-update__header">
+                <h3>My Data</h3>
                 <div class="my-data__header-main">
                     <img class="my-data-update__header-button back" src=${backIMG}>
                     <img class="my-data-update__header-button out" src=${signoutIMG}>
@@ -59,19 +63,20 @@ export class MyDataUpdatePage extends HTMLElement {
                 <form class="my-data-update__body-form">
                     <label class="my-data-update__body-label">
                         <h5 class="my-data-update__body-title">USERNAME</h5>
-                        <input class="my-data-update__body-data user-data" name="update-name">
+                        <h4 class="my-data-update__body-data-username user-data">${userUsername}</h4>
                     </label>
                     <label class="my-data-update__body-label">
                         <h5 class="my-data-update__body-title">FULLNAME</h5>
-                        <input class="my-data-update__body-data fullname-data" name="update-fullname">
+                        <input class="my-data-update__body-data fullname-data" name="update-fullname" placeholder="${userFullname}">
                     </label>
                     <label class="my-data-update__body-label">
                         <h5 class="my-data-update__body-title">EMAIL</h5>
-                        <input class="my-data-update__body-data email-data" name="update-email">
+                        <input class="my-data-update__body-data email-data" name="update-email" placeholder="${userEmail}">
                     </label>
+                    </br>
+                    <button class="my-data-update__body-button save">UPDATE</button>
                 </form>
                 <div class="my-data-update__body-button-container">
-                    <button class="my-data-update__body-button save">SAVE</button>
                     <button class="my-data-update__body-button cancel">CANCEL</button>
                 </div>
             </div>
@@ -96,8 +101,9 @@ export class MyDataUpdatePage extends HTMLElement {
             width: 100%;
             height: 10vh;
             padding: 20px;
-            flex-direction: row-reverse;
+            flex-direction: row;
             align-items: center;
+            justify-content: space-between;
         }
         
         .my-data-update__header-main{
@@ -148,25 +154,40 @@ export class MyDataUpdatePage extends HTMLElement {
         }
 
         .my-data-update__body-title{
+            font-size: 20px;
             margin: 0 auto;
         }
         
         .my-data-update__body-data{
             width: 100%;
-            padding: 10px;
+            padding: 15px;
             font-size: 25px;
             color: whitesmoke;
             border: none;
-            background: #5e5e5e3b;
+            background: #37474f70;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .my-data-update__body-data-username{
+            margin: 0 auto;
+            padding: 10px;
+            background: #37474f70;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
 
         .my-data-update__body-button-container{
             display: flex;
-            gap: 10%;
-            padding: 20px;
+            gap: 10px;
             width: 100%;
-            justify-content: space-around;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
+
 
         .my-data-update__body-button{
             width: 100%;
@@ -175,6 +196,12 @@ export class MyDataUpdatePage extends HTMLElement {
             background: #607d8b;
             color: #e0e0e0;
             font-size: 15px;
+            align-self: center;
+        }
+        @media (min-width: 1024px){
+            .my-data-update__body-button{
+                max-width: 730px;
+            }
         }
 
         .my-data-update__footer{

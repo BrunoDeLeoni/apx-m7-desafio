@@ -4,7 +4,8 @@
 
 body{
     margin: 0 auto;
-    background: #252525;
+    background-image: url("./assets/wallpaper.png");
+    background-size: cover;
     max-width: 100%;
     min-width: 360px;
     min-height: 100vh;

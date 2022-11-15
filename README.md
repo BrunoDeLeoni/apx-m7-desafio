@@ -51,3 +51,9 @@ Versión 1.2
 Versión 1.3
 *Estructurado Web*
 * Creación de 'my-data' y 'my-data-update'
+
+Versión 1.4
+*Prototipo Web*
+* Actulización de 'my-data' y 'my-data-update'
+* Creación de paginas restantes
+* Prototipo de Front-End finalizado

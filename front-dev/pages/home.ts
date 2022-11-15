@@ -79,7 +79,7 @@ export class HomePage extends HTMLElement {
             width: 100%;
             height: 10vh;
             padding: 20px;
-            background-color: #263238;
+            background-color: #2632387d;
             align-items: center;
             justify-content: space-between;
         }
@@ -121,10 +121,16 @@ export class HomePage extends HTMLElement {
             padding: 10px;
             border: none;
             border-radius: 10px;
-            background: #607d8b;
+            background: #607d8b9e;
             color: #e0e0e0;
             font-size: 25px;
         }
+        @media (min-width: 768px){
+            .home__body-button{
+                width: 700px;
+            }
+        }
+        
         `
         this.appendChild(style)    
     }

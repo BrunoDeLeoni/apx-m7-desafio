@@ -15,7 +15,8 @@ export class RegisterPage extends HTMLElement {
         const register: any = this.querySelector(".register")
         const back: any = this.querySelector(".back")
         register.addEventListener("click", ()=>{
-            Router.go("/home")
+            console.log("Register")
+            Router.go("/")
         })
         back.addEventListener("click", ()=>{
             Router.go("/")
@@ -35,29 +36,29 @@ export class RegisterPage extends HTMLElement {
                 </div>
                 <form class="register__body-form">
                     <label class="register__body-label username">
-                        <h3 class="register__body-title username-title">Username</h6>
+                        <h3 class="register__body-title username-title">USERNAME</h6>
                         <input class="register__body-input username-input" type="text" name="username-name">
                     </label>
                     <label class="register__body-label fullname">
-                        <h3 class="register__body-title fullname-title">Fullname</h6>
+                        <h3 class="register__body-title fullname-title">FULLNAME</h6>
                         <input class="register__body-input fullname-input" type="text" name="fullname-name">
                     </label>
                     <label class="register__body-label email">
-                        <h3 class="register__body-title email-title">Email</h6>
+                        <h3 class="register__body-title email-title">EMAIL</h6>
                         <input class="register__body-input email-input" type="email" name="email-name">
                     </label>
                     <label class="register__body-label pass">
-                        <h3 class="register__body-title pass-title">Password</h6>
+                        <h3 class="register__body-title pass-title">PASSWORD</h6>
                         <input class="register__body-input pass-input" type="password" name="password-name">
                     </label>
                     <label class="register__body-label confirmation">
-                        <h3 class="register__body-title confirmation-title">Confirmation Password</h6>
+                        <h3 class="register__body-title confirmation-title">CONFIRMATION PASSWORD</h6>
                         <input class="register__body-input confimation-input" type="password">
                     </label>
-                    <div class="register__body-button">
+                    <label class="register__body-button">
                         <button class="register__body-button-form register">REGISTER</button>
                         <button class="register__body-button-form back">BACK</button>
-                    </div>
+                    </label>
                 </form>
             </div>
             <div class="register__footer">
@@ -82,7 +83,7 @@ export class RegisterPage extends HTMLElement {
         }
         
         .register__body{
-            min-height: 80vh;
+            min-height: 75vh;
             width: 320px;
             padding: 15px;
             display: flex;
@@ -91,7 +92,7 @@ export class RegisterPage extends HTMLElement {
             align-items: center;
             background: #263238;
             border-radius: 25px;
-            box-shadow: 0px 0px 50px 60px #191919;
+            box-shadow: 0px 0px 50px 25px #000000bf;
         }
         @media (min-width: 565px){
             .register__body{
@@ -126,6 +127,7 @@ export class RegisterPage extends HTMLElement {
         }
 
         .register__body-title{
+            font-size: 15px;
             margin: 0 auto;
         }
         

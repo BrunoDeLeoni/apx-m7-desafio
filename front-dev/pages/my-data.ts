@@ -1,5 +1,6 @@
 /* Imports */
 import { Router } from "@vaadin/router";
+import { state } from "../state"
 
 /* Variables */
 const style = document.createElement("style")
@@ -35,15 +36,16 @@ export class MyDataPage extends HTMLElement {
 
     render(){
         /* Temporal */
-        userUsername = "brunodeleoni"
-        userFullname = "Barbara De Leoni, Bruno"
-        userEmail = "brunobarbaradeleoni@gmail.com"
+        userUsername = state.getState().username
+        userFullname = state.getState().userFullname
+        userEmail = state.getState().userEmail
 
         this.className = "my-data"
         this.innerHTML = 
         `
         <div class="my-data__container">
             <div class="my-data__header">
+                <h3>My Data</h3>
                 <div class="my-data__header-main">
                     <img class="my-data__header-button back" src=${backIMG}>
                     <img class="my-data__header-button out" src=${signoutIMG}>
@@ -64,7 +66,9 @@ export class MyDataPage extends HTMLElement {
                         <h4 class="my-data__body-data email-data">${userEmail}</h4>
                     </label>
                 </div>
-                <button class="my-data__body-update">UPDATE</button>
+                <div class="my-data__body-button-container">
+                    <button class="my-data__body-update">SET INFO</button>
+                </div>
             </div>
             <div class="my-data__footer">
             </div>
@@ -87,8 +91,9 @@ export class MyDataPage extends HTMLElement {
             width: 100%;
             height: 10vh;
             padding: 20px;
-            flex-direction: row-reverse;
+            flex-direction: row;
             align-items: center;
+            justify-content: space-between;
         }
         
         .my-data__header-main{
@@ -139,16 +144,22 @@ export class MyDataPage extends HTMLElement {
         }
 
         .my-data__body-title{
+            font-size: 20px;
             margin: 0 auto;
         }
         
         .my-data__body-data{
             margin: 0 auto;
             padding: 10px;
-            background: #5e5e5e3b;
+            background: #37474f70;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+        }
+
+        .my-data__body-button-container{
+            display: flex;
+            justify-content: center;
         }
 
         .my-data__body-update{
@@ -158,6 +169,11 @@ export class MyDataPage extends HTMLElement {
             background: #607d8b;
             color: #e0e0e0;
             font-size: 15px;
+        }
+        @media (min-width: 768px){
+            .my-data__body-update{
+                width: 730px;
+            }
         }
 
         .my-data__footer{

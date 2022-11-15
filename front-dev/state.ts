@@ -1,22 +1,23 @@
-import { Router } from "@vaadin/router"
+/* Imports */
 
+/* Variables */
 const API_BASE_URL = process.env.API_HOST
 
 /* State */
 const state = {
+
     /* Data */
     data: { 
-        
+        username: "brunodeleoni",
+        userFullname: "Bruno De Leoni",
+        userEmail: "bruno@gmail.com"
     },
 
-    listeners: [
-
-    ],
+    /* Listeners */
+    listeners: [],
 
     /* Init */
-    init(){
-        
-    },
+    init(){},
 
     /* State: Actual */
     getState(){
@@ -30,18 +31,22 @@ const state = {
             callback()
         }
     },
-
-    login(username, pass){
-        if(!username && !pass){
-            return true
+    
+    /* Search Active */
+    searchActive(search){
+        if(search == true){
+            return "ACTIVE"
+        } else {
+            return "DESACTIVE"
         }
     },
 
     /* Subscribe */
     subscribe(callback: (any) => any){
         this.listeners.push(callback)
-    },
+    }
 
 }
 
+/* Exports */
 export { state }

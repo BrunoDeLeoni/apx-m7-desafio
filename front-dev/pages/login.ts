@@ -15,6 +15,7 @@ export class LoginPage extends HTMLElement {
         const login: any = this.querySelector(".login")
         const back: any = this.querySelector(".back")
         login.addEventListener("click", ()=>{
+            console.log("Login")
             Router.go("/home")
         })
         back.addEventListener("click", ()=>{
@@ -42,10 +43,10 @@ export class LoginPage extends HTMLElement {
                         <h3 class="login__body-title pass-title">PASSWORD</h6>
                         <input class="login__body-input pass-input" type="password" name="password-name">
                     </label>
-                    <div class="login__body-button">
+                    <label class="login__body-button">
                         <button class="login__body-button-form login">LOGIN</button>
                         <button class="login__body-button-form back">BACK</button>
-                    </div>
+                    </label>
                 </form>
             </div>
             <div class="login__footer">
@@ -70,7 +71,7 @@ export class LoginPage extends HTMLElement {
         }
         
         .login__body{
-            min-height: 60vh;
+            min-height: 50vh;
             width: 320px;
             padding: 15px;
             display: flex;
@@ -79,7 +80,7 @@ export class LoginPage extends HTMLElement {
             align-items: center;
             background: #263238;
             border-radius: 25px;
-            box-shadow: 0px 0px 50px 60px #191919;
+            box-shadow: 0px 0px 50px 25px #000000bf;
         }
 
         .login__body-form{
@@ -104,6 +105,7 @@ export class LoginPage extends HTMLElement {
         }
 
         .login__body-title{
+            font-size: 15px;
             margin: 0 auto;
         }
         

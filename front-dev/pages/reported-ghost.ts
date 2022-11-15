@@ -4,35 +4,22 @@ import { Router } from "@vaadin/router";
 /* Variables */
 const style = document.createElement("style")
 const backIMG = require("url:../assets/back.png")
-const signoutIMG = require("url:../assets/signout.png")
 let petName, petLocation, petPhoto;
 
 /* Class Reported */
-export class ReportedPage extends HTMLElement {
+export class ReportedGhostPage extends HTMLElement {
 
     /* Connected to Callback */
     connectedCallback(){
         this.render()
 
-        /* Ver Mas */
-        const verMas: any = this.querySelector(".ver-mas")
-        verMas.addEventListener("click", ()=>{
-            Router.go("/reported/info")
-        })
-
-        /* Sign Out */
-        const signout: any = this.querySelector(".out")
-        signout.addEventListener("click", ()=>{
-            Router.go("/")
-        })
-        
         /* Back */
         const back: any = this.querySelector(".back")
         back.addEventListener("click", ()=>{
-            Router.go("/home")
+            Router.go("/")
         })
     }
-
+    
     render(){
         /* Temporal */
         petName = "Polo"
@@ -44,24 +31,38 @@ export class ReportedPage extends HTMLElement {
         `
         <div class="reported__container">
             <div class="reported__header">
-            <h3>Reported</h3>
+            <h3>Reported Visit</h3>
                 <div class="reported__header-main">
                     <img class="reported__header-button back" src=${backIMG}>
-                    <img class="reported__header-button out" src=${signoutIMG}>
                 </div>
             </div>
             <div class="reported__body">
                 <div class="reported__body">
-
+                    
                     <div class="reported__body-box">
-                        <img class="reported__body-box-img" src=${petPhoto}>
+                        <img class="reported__body-box-img" src=${petPhoto})>
                         <div class="reported__body-box-info">
                             <h4 class="reported__body-box-info-title">${petName}</h4>
                             <h6 class="reported__body-box-info-subtitle">${petLocation}</h6>
                         </div>
-                        <h6 class="reported__body-box-info-link ver-mas">ver mas...</h6>
                     </div>
-
+                    
+                    <div class="reported__body-box">
+                        <img class="reported__body-box-img" src=${petPhoto})>
+                        <div class="reported__body-box-info">
+                            <h4 class="reported__body-box-info-title">${petName}</h4>
+                            <h6 class="reported__body-box-info-subtitle">${petLocation}</h6>
+                        </div>
+                    </div>
+                    
+                    <div class="reported__body-box">
+                        <img class="reported__body-box-img" src=${petPhoto})>
+                        <div class="reported__body-box-info">
+                            <h4 class="reported__body-box-info-title">${petName}</h4>
+                            <h6 class="reported__body-box-info-subtitle">${petLocation}</h6>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
             <div class="reported__footer">
@@ -151,10 +152,6 @@ export class ReportedPage extends HTMLElement {
             margin: 0 auto;
         }
 
-        .reported__body-box-info-link{
-            text-align: end;
-            margin: 0 auto;
-        }
 
         .reported__footer{
             display: flex;
@@ -167,4 +164,4 @@ export class ReportedPage extends HTMLElement {
 }
 
 /* Define */
-customElements.define("reported-page", ReportedPage)
+customElements.define("reported-ghost-page", ReportedGhostPage)

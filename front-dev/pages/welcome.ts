@@ -30,9 +30,13 @@ export class WelcomePage extends HTMLElement {
         
         /* Login/Register: Mobile */
         const loginMobile: any = this.querySelector(".loginMobile")
+        const visitMobile: any = this.querySelector(".visitMobile")
         const registerMobile: any = this.querySelector(".registerMobile")
         loginMobile.addEventListener("click", ()=>{
             Router.go("/login")
+        })
+        visitMobile.addEventListener("click", ()=>{
+            Router.go("/visit")
         })
         registerMobile.addEventListener("click", ()=>{
             Router.go("/register")
@@ -40,9 +44,13 @@ export class WelcomePage extends HTMLElement {
 
         /* Login/Register: Mobile */
         const loginDesktop: any = this.querySelector(".loginDesktop")
+        const visitDesktop: any = this.querySelector(".visitDesktop")
         const registerDesktop: any = this.querySelector(".registerDesktop")
         loginDesktop.addEventListener("click", ()=>{
             Router.go("/login")
+        })
+        visitDesktop.addEventListener("click", ()=>{
+            Router.go("/visit")
         })
         registerDesktop.addEventListener("click", ()=>{
             Router.go("/register")
@@ -59,20 +67,19 @@ export class WelcomePage extends HTMLElement {
                 <img class="welcome__header-login-mobile open" src=${loginIMG}>
                 <div class="welcome__header-login-desktop">
                     <a class="welcome__header-main-button-desktop loginDesktop">LOGIN</a>
+                    <a class="welcome__header-main-button-desktop visitDesktop">VISIT</a>
                     <a class="welcome__header-main-button-desktop registerDesktop">REGISTER</a>
                 </div>
             </div>
             <div class="welcome__body">
                 <div class="welcome__header-main-mobile">
                     <a class="welcome__header-main-button-mobile loginMobile">LOGIN</a>
+                    <a class="welcome__header-main-button-mobile visitMobile">VISIT</a>
                     <a class="welcome__header-main-button-mobile registerMobile">REGISTER</a>
                     <a class="welcome__header-main-button-mobile back">BACK</a>
                 </div>
-                <div class="welcome__body-sup">
-                    <img class="welcome__body-sup-title" src=${titleIMG}>
-                </div>
-                <div class="welcome__body-inf">
-                    <h4 class="welcome__body-inf-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, nihil reprehenderit. Ut, aspernatur dolor quo eveniet a odio tenetur quaerat optio culpa minus perferendis distinctio doloremque laudantium quae, tempora hic?</h4>
+                <div class="welcome__body-box">
+                    <img class="welcome__body-box-title" src=${titleIMG}>
                 </div>
             </div>
             <div class="welcome__footer">
@@ -99,7 +106,7 @@ export class WelcomePage extends HTMLElement {
             height: 10vh;
             width: 100%;
             padding: 20px;
-            background-color: #263238;
+            background-color: #2632387d;
             align-items: center;
             justify-content: space-between;
         }
@@ -134,7 +141,7 @@ export class WelcomePage extends HTMLElement {
             justify-content: space-evenly;
             align-items: center;
             position: absolute;
-            box-shadow: 0px 0px 50px 60px #191919;
+            box-shadow: 0px 0px 50px 25px #000000bf;
             display: none;
         }
         @media (min-width:390px){
@@ -145,7 +152,7 @@ export class WelcomePage extends HTMLElement {
 
         .welcome__header-main-button-mobile{
             font-family: 'Poppins';
-            font-size: 35px;
+            font-size: 30px;
             color: whitesmoke;
         }
 
@@ -164,30 +171,19 @@ export class WelcomePage extends HTMLElement {
             }
         }
         
-        .welcome__body-sup{
+        .welcome__body-box{
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .welcome__body-inf{
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .welcome__body-sup-title{
+        .welcome__body-box-title{
             height: 35vh;
         }
         @media (min-width: 768px){
-            .welcome__body-sup-title{
+            .welcome__body-box-title{
                 height: 45vh;
             }
-        }
-
-        .welcome__body-inf-text{
-            margin: 0 auto;
-            padding: 5px;
         }
 
         .welcome__footer{
