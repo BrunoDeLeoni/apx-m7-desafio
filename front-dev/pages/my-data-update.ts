@@ -28,10 +28,20 @@ export class MyDataUpdatePage extends HTMLElement {
         })
 
         /* Save */
-        const save: any = this.querySelector(".save")
-        save.addEventListener("click", ()=>{
-            console.log("Actualiza los Datos")
-            Router.go("/user")
+        const save: any = this.querySelector(".my-data-update__body-form")
+        save.addEventListener("submit", (e)=>{
+            e.preventDefault();
+            const update = {
+                userFullname: e.target["update-fullname"].value,
+                userEmail: e.target["update-email"].value
+            }
+            console.log(update)
+            state.userUpdate(update)
+            .then((data)=>{
+                if(data[0] === 1){
+                    Router.go("/home")
+                }
+            })
         })
         
         /* Cancel */
@@ -43,10 +53,10 @@ export class MyDataUpdatePage extends HTMLElement {
     }
 
     render(){
-        /* Temporal */
-        userUsername = state.getState().username
-        userFullname = state.getState().userFullname
-        userEmail = state.getState().userEmail
+        const currentState = state.getState()
+        userUsername = currentState.username
+        userFullname = currentState.userFullname
+        userEmail = currentState.userEmail
 
         this.className = "my-data"
         this.innerHTML = 

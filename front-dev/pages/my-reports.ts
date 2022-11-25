@@ -1,11 +1,11 @@
 /* Imports */
 import { Router } from "@vaadin/router";
+import { state } from "../state"
 
 /* Variables */
 const style = document.createElement("style")
 const backIMG = require("url:../assets/back.png")
 const signoutIMG = require("url:../assets/signout.png")
-let petName, petLocation, petPhoto;
 
 /* Class My Data */
 export class MyReportsPage extends HTMLElement {
@@ -13,10 +13,26 @@ export class MyReportsPage extends HTMLElement {
     /* Connected to Callback */
     connectedCallback(){
         this.render()
+        
+        /* Add Items */
+        state.petMyReports()
+        .then((item)=>{
+            const template: any = this.querySelector(".my-reports__body-box");
+            const container: any = this.querySelector(".my-reports__body");
+            for (const i of item){
+                template.querySelector(".my-reports__body-box-info-title").textContent = i.petName;
+                template.querySelector(".my-reports__body-box-info-subtitle").textContent = i.petLocation;
+                template.querySelector(".ver-mas").id = i.id;
+                const clone = document.importNode(template, true);
+                container.appendChild(clone);
+             }
+        })
 
         /* Ver Mas */
         const verMas: any = this.querySelector(".ver-mas")
-        verMas.addEventListener("click", ()=>{
+        verMas.addEventListener("click", (e)=>{
+            e.preventDefault();
+            state.petMyReportsInfo(e.target.id)
             Router.go("/reports/info")
         })
 
@@ -34,11 +50,6 @@ export class MyReportsPage extends HTMLElement {
     }
 
     render(){
-        /* Temporal */
-        petName = "Toto"
-        petLocation = "Córdoba"
-        petPhoto = require("url:../assets/temp-perro.png");
-
         this.className = "my-reports"
         this.innerHTML = 
         `
@@ -50,18 +61,15 @@ export class MyReportsPage extends HTMLElement {
                     <img class="my-reports__header-button out" src=${signoutIMG}>
                 </div>
             </div>
-
             <div class="my-reports__body">
-                
                 <div class="my-reports__body-box">
-                    <img class="my-reports__body-box-img" src="${petPhoto}">
+                    <img class="my-reports__body-box-img" src="">
                     <div class="my-reports__body-box-info">
-                        <h4 class="my-reports__body-box-info-title">${petName}</h4>
-                        <h6 class="my-reports__body-box-info-subtitle">${petLocation}</h6>
+                        <h4 class="my-reports__body-box-info-title"></h4>
+                        <h6 class="my-reports__body-box-info-subtitle"></h6>
                     </div>
-                    <h6 class="my-reports__body-box-info-subtitle ver-mas">ver mas...</h6>
+                    <a class="ver-mas" id="">ver mas...</a>
                 </div>
-
             </div>
             <div class="my-reports__footer">
             </div>
@@ -151,7 +159,8 @@ export class MyReportsPage extends HTMLElement {
         }
 
         .ver-mas{
-            text-align: end;
+            display: flex;
+            flex-direction: row-reverse;
         }
         
         .my-reports__footer{

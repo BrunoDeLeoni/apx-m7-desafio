@@ -24,6 +24,8 @@
     "sequelize": "^6.25.3"
   },
   "scripts": {
-    "dev:front": "parcel serve './front-dev/index.html'"
+    "dev:front": "parcel serve './front-dev/index.html'",
+    "dev:back": "nodemon --watch './back-dev/index.ts' --exec 'ts-node ./back-dev/index.ts'",
+    "dev:sync": "ts-node ./back-dev/database/sync"
   }
 }

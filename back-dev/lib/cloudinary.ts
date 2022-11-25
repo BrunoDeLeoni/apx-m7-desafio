@@ -3,9 +3,9 @@ import { v2 as cloudinary } from "cloudinary"
 
 /* Cloudinary */
 cloudinary.config({
-    cloud_name: "brunodeleoni",
-    api_key: "497182247382189",
-    api_secret: "_qpOChA_BHx47hpwmI1dsachQvk",
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET,
 });
 
 /* Export */

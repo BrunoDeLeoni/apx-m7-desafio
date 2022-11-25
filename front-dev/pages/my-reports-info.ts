@@ -13,8 +13,26 @@ export class MyReportsInfoPage extends HTMLElement {
 
     /* Connected to Callback */
     connectedCallback(){
-        this.render()
+        state.subscribe(() => {
+            const currentState = state.getState()
+            petName = currentState.petName,
+            petBreed = currentState.petBreed,
+            petLocation = currentState.petLocation,
+            petMap = [{lat: "7,29", lon: "7,31"}],
+            petDescription = currentState.petDescription,
+            petPhoto = "",
+            petSearch = state.searchActive(currentState.petActive),
+            petInfoUser = "brunodeleoni",
+            petInfoDescription = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis repellat sunt deserunt at. Aliquam voluptate nisi quisquam rem molestiae, nobis earum cum laborum in magni, illum aliquid reiciendis porro dignissimos!"
+            
+            this.render();
+            
+        })
 
+        this.render();
+    }
+
+    addButtons(){
         /* Search Active/Desactive */
         const search: any = this.querySelector(".search-desactive")
         search.addEventListener("click", ()=>{
@@ -36,16 +54,6 @@ export class MyReportsInfoPage extends HTMLElement {
     }
 
     render(){
-        /* Temporal */
-        petName = "Toto",
-        petBreed = "Dog",
-        petLocation = "Córdoba",
-        petMap = [{lat: "7,29", lon: "7,31"}],
-        petDescription = "Mastin Napolitano. Gris. 4 años. Colla de cuero.",
-        petPhoto = require("url:../assets/temp-perro.png"),
-        petSearch = state.searchActive(true),
-        petInfoUser = "brunodeleoni",
-        petInfoDescription = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis repellat sunt deserunt at. Aliquam voluptate nisi quisquam rem molestiae, nobis earum cum laborum in magni, illum aliquid reiciendis porro dignissimos!"
 
         this.className = "my-reports-info"
         this.innerHTML = 
@@ -259,7 +267,8 @@ export class MyReportsInfoPage extends HTMLElement {
         }
 
         `
-        this.appendChild(style)    
+        this.appendChild(style)
+        this.addButtons();
     }
 }
 

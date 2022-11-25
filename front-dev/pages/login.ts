@@ -1,5 +1,6 @@
 /* Imports */
 import { Router } from "@vaadin/router"
+import { state } from "../state"
 
 /* Varibales */
 const style = document.createElement("style")
@@ -12,11 +13,23 @@ export class LoginPage extends HTMLElement {
     connectedCallback(){
         this.render()
 
-        const login: any = this.querySelector(".login")
+        const login: any = this.querySelector(".login__body-form")
         const back: any = this.querySelector(".back")
-        login.addEventListener("click", ()=>{
-            console.log("Login")
-            Router.go("/home")
+        login.addEventListener("submit", (e)=>{
+            e.preventDefault();
+            const dataLoginUser = {
+                username: e.target["username-name"].value.toLowerCase(),
+                userPassword: e.target["password-name"].value
+            }
+            console.log(dataLoginUser)
+            state.loginUser(dataLoginUser)
+            .then((res)=>{
+                if(res == false){
+                    alert("Usuario o Contraseña Incorrectos")
+                } else {
+                    Router.go("/home")
+                }
+            })
         })
         back.addEventListener("click", ()=>{
             Router.go("/")
@@ -37,11 +50,11 @@ export class LoginPage extends HTMLElement {
                 <form class="login__body-form">
                     <label class="login__body-label username">
                         <h3 class="login__body-title username-title">USERNAME</h6>
-                        <input class="login__body-input username-input" type="text" name="username-name">
+                        <input class="login__body-input username-input" type="text" name="username-name" required>
                     </label>
                     <label class="login__body-label pass">
                         <h3 class="login__body-title pass-title">PASSWORD</h6>
-                        <input class="login__body-input pass-input" type="password" name="password-name">
+                        <input class="login__body-input pass-input" type="password" name="password-name" required>
                     </label>
                     <label class="login__body-button">
                         <button class="login__body-button-form login">LOGIN</button>

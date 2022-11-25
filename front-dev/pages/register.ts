@@ -1,5 +1,6 @@
 /* Imports */
 import { Router } from "@vaadin/router"
+import { state } from "../state"
 
 /* Varibales */
 const style = document.createElement("style")
@@ -12,11 +13,29 @@ export class RegisterPage extends HTMLElement {
     connectedCallback(){
         this.render()
 
-        const register: any = this.querySelector(".register")
+        const register: any = this.querySelector(".register__body-form")
         const back: any = this.querySelector(".back")
-        register.addEventListener("click", ()=>{
-            console.log("Register")
-            Router.go("/")
+        register.addEventListener("submit", (e)=>{
+            e.preventDefault();
+            const dataNewUser = {
+                username: e.target["username-name"].value.toLowerCase(),
+                userFullname: e.target["fullname-name"].value,
+                userEmail: e.target["email-name"].value,
+                userPassword: e.target["password-name"].value
+            }
+            console.log(dataNewUser)
+            if (e.target["password-name"].value === e.target["confirmation-name"].value){
+                state.newUser(dataNewUser)
+                .then((res)=>{
+                    if(res == true){
+                        Router.go("/")
+                    } else {
+                        alert("Usuario No Disponible")
+                    }
+                })
+            } else {
+                alert("Contraseña Incorrecta")
+            }
         })
         back.addEventListener("click", ()=>{
             Router.go("/")
@@ -37,26 +56,26 @@ export class RegisterPage extends HTMLElement {
                 <form class="register__body-form">
                     <label class="register__body-label username">
                         <h3 class="register__body-title username-title">USERNAME</h6>
-                        <input class="register__body-input username-input" type="text" name="username-name">
+                        <input class="register__body-input username-input" type="text" name="username-name" required>
                     </label>
                     <label class="register__body-label fullname">
                         <h3 class="register__body-title fullname-title">FULLNAME</h6>
-                        <input class="register__body-input fullname-input" type="text" name="fullname-name">
+                        <input class="register__body-input fullname-input" type="text" name="fullname-name" required>
                     </label>
                     <label class="register__body-label email">
                         <h3 class="register__body-title email-title">EMAIL</h6>
-                        <input class="register__body-input email-input" type="email" name="email-name">
+                        <input class="register__body-input email-input" type="email" name="email-name" required>
                     </label>
                     <label class="register__body-label pass">
                         <h3 class="register__body-title pass-title">PASSWORD</h6>
-                        <input class="register__body-input pass-input" type="password" name="password-name">
+                        <input class="register__body-input pass-input" type="password" name="password-name" required>
                     </label>
                     <label class="register__body-label confirmation">
                         <h3 class="register__body-title confirmation-title">CONFIRMATION PASSWORD</h6>
-                        <input class="register__body-input confimation-input" type="password">
+                        <input class="register__body-input confimation-input" type="password" name="confirmation-name" required>
                     </label>
                     <label class="register__body-button">
-                        <button class="register__body-button-form register">REGISTER</button>
+                        <button class="register__body-button-form button-register register">REGISTER</button>
                         <button class="register__body-button-form back">BACK</button>
                     </label>
                 </form>
@@ -153,6 +172,10 @@ export class RegisterPage extends HTMLElement {
             background: #607d8b;
             color: #e0e0e0;
             font-size: 15px;
+        }
+
+        .button-register{
+
         }
 
         .register__footer{

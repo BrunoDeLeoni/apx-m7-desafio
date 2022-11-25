@@ -1,10 +1,10 @@
 /* Imports */
 import { Router } from "@vaadin/router";
+import { state } from "../state";
 
 /* Variables */
 const style = document.createElement("style")
 const backIMG = require("url:../assets/back.png")
-let petName, petLocation, petPhoto;
 
 /* Class Reported */
 export class ReportedGhostPage extends HTMLElement {
@@ -12,20 +12,29 @@ export class ReportedGhostPage extends HTMLElement {
     /* Connected to Callback */
     connectedCallback(){
         this.render()
+        
+        /* Add Items */
+        state.petVisit()
+        .then((item)=>{
+            const template: any = this.querySelector(".reported__body-box");
+            const container: any = this.querySelector(".reported__body-container");
+            for (const i of item){
+                template.querySelector(".reported__body-box-info-title").textContent = i.petName;
+                template.querySelector(".reported__body-box-info-subtitle").textContent = i.petLocation;
+                const clone = document.importNode(template, true);
+                container.appendChild(clone);
+             }
+        })
 
         /* Back */
         const back: any = this.querySelector(".back")
         back.addEventListener("click", ()=>{
             Router.go("/")
         })
+
     }
     
     render(){
-        /* Temporal */
-        petName = "Polo"
-        petLocation = "La Carlota"
-        petPhoto = require("url:../assets/temp-perro.png");
-
         this.className = "reported"
         this.innerHTML = 
         `
@@ -36,35 +45,19 @@ export class ReportedGhostPage extends HTMLElement {
                     <img class="reported__header-button back" src=${backIMG}>
                 </div>
             </div>
-            <div class="reported__body">
-                <div class="reported__body">
-                    
+            <div class="reported__body"> 
+            
+                <div class="reported__body-container">
                     <div class="reported__body-box">
-                        <img class="reported__body-box-img" src=${petPhoto})>
+                        <img class="reported__body-box-img" src="">
                         <div class="reported__body-box-info">
-                            <h4 class="reported__body-box-info-title">${petName}</h4>
-                            <h6 class="reported__body-box-info-subtitle">${petLocation}</h6>
+                            <h4 class="reported__body-box-info-title"></h4>
+                            <h6 class="reported__body-box-info-subtitle"></h6>
                         </div>
                     </div>
-                    
-                    <div class="reported__body-box">
-                        <img class="reported__body-box-img" src=${petPhoto})>
-                        <div class="reported__body-box-info">
-                            <h4 class="reported__body-box-info-title">${petName}</h4>
-                            <h6 class="reported__body-box-info-subtitle">${petLocation}</h6>
-                        </div>
-                    </div>
-                    
-                    <div class="reported__body-box">
-                        <img class="reported__body-box-img" src=${petPhoto})>
-                        <div class="reported__body-box-info">
-                            <h4 class="reported__body-box-info-title">${petName}</h4>
-                            <h6 class="reported__body-box-info-subtitle">${petLocation}</h6>
-                        </div>
-                    </div>
-                    
                 </div>
-            </div>
+                    
+            </div> 
             <div class="reported__footer">
             </div>
         </div>
@@ -101,7 +94,7 @@ export class ReportedGhostPage extends HTMLElement {
             height: 5vh;
         }
 
-        .reported__body{
+        .reported__body-container{
             min-height: 85vh;
             width: 100%;
             padding: 20px;
@@ -111,12 +104,12 @@ export class ReportedGhostPage extends HTMLElement {
             align-items: center;
         }
         @media (min-width: 500px){
-            .reported__body{
+            .reported__body-container{
                 width: 500px;
             }
         }
         @media (min-width: 768px){
-            .reported__body{
+            .reported__body-container{
                 width: 768px;
                 display: grid;
                 grid-template-columns: auto auto;
@@ -124,7 +117,7 @@ export class ReportedGhostPage extends HTMLElement {
             }
         }
         @media (min-width: 1024px){
-            .reported__body{
+            .reported__body-container{
                 width: 1024px;
                 display: grid;
                 grid-template-columns: auto auto auto;
@@ -159,7 +152,8 @@ export class ReportedGhostPage extends HTMLElement {
         }
 
         `
-        this.appendChild(style)    
+        this.appendChild(style)
+         
     }
 }
 

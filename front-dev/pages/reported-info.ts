@@ -1,19 +1,37 @@
 /* Imports */
 import { Router } from "@vaadin/router";
+import { state } from "../state"
 
 /* Variables */
 const style = document.createElement("style")
 const backIMG = require("url:../assets/back.png")
 const signoutIMG = require("url:../assets/signout.png")
-let petName, petBreed, petDescription, petLocation, petUserEmail, petMap, petPhoto;
+let petName, petBreed, petEmail, petDescription, petLocation, petUserEmail, petMap, petPhoto;
 
 /* Class Report */
 export class ReportedInfoPage extends HTMLElement {
 
     /* Connected to Callback */
     connectedCallback(){
+        state.subscribe(() => {
+            const currentState = state.getState()
+            petName = currentState.petName,
+            petBreed = currentState.petBreed,
+            petLocation = currentState.petLocation,
+            petMap = [{lat: "7,29", lon: "7,31"}],
+            petDescription = currentState.petDescription,
+            petPhoto = "",
+            petEmail = currentState.petEmail,
+
+            this.render();
+            
+        })
+
         this.render()
 
+    }
+
+    addButtons(){
         /* Sign Out */
         const signout: any = this.querySelector(".out")
         signout.addEventListener("click", ()=>{
@@ -23,31 +41,27 @@ export class ReportedInfoPage extends HTMLElement {
         /* Back */
         const back: any = this.querySelector(".back")
         back.addEventListener("click", ()=>{
-            Router.go("/reports")
+            Router.go("/reported")
         })
         
-        const openInfo: any = this.querySelector(".open-info")
-        const closeInfo: any = this.querySelector(".close-info")
         const boxInfo: any = this.querySelector(".reported-add__body")
+        const openInfo: any = this.querySelector(".open-info")
+        const sendInfo: any = this.querySelector(".reported-add__form")
+        const closeInfo: any = this.querySelector(".close-info")
         openInfo.addEventListener("click", ()=>{
             boxInfo.style.display = "flex"
+        })
+        sendInfo.addEventListener("submit", (e)=>{
+            e.preventDefault();
+            state.petReportedInfoAdd(e.target["info"].value)
+            boxInfo.style.display = "none"
         })
         closeInfo.addEventListener("click", ()=>{
             boxInfo.style.display = "none"
         })
-
     }
 
     render(){
-        /* Temporal */
-        petName = "Toto",
-        petBreed = "Dog",
-        petLocation = "Córdoba",
-        petDescription = "Mastin Napolitano. Gris. 4 Años. Collar de cuaro",
-        petMap = [{lat: "7,29", lon: "7,31"}],
-        petPhoto = require("url:../assets/temp-perro.png"),
-        petUserEmail = "bruno@gmail.com",
-
         this.className = "reported-info"
         this.innerHTML = 
         `
@@ -59,17 +73,17 @@ export class ReportedInfoPage extends HTMLElement {
                     <img class="reported-info__header-button out" src=${signoutIMG}>
                 </div>
             </div>
+            <div class="reported-add__body">
+                <form class="reported-add__form">
+                    <label class="reported-add__form-label">
+                        <h5 class="reported-add__form-title">Information</h5>
+                        <textarea class="reported-add__form-data" name="info" placeholder="Entre al RP4 y RN8, en las cercanias al Anti-Aereo"></textarea>
+                    </label>
+                    <button class="reported-add__button send-info">Send</button>
+                    <button class="reported-add__button close-info">Cancel</button>
+                </form>
+            </div>
             <div class="reported-info__body">
-                <div class="reported-add__body">
-                    <form class="reported-add__form">
-                        <label class="reported-add__form-label">
-                            <h5 class="reported-add__form-title">Information</h5>
-                            <textarea class="reported-add__form-data" name="info" placeholder="Entre al RP4 y RN8, en las cercanias al Anti-Aereo"></textarea>
-                        </label>
-                        <button class="reported-add__button send">Send</button>
-                        <button class="reported-add__button close-info">Cancel</button>
-                    </form>
-                </div>
                 <form class="reported-info__form">
                     <label class="reported-info__form-label">
                         <h5 class="reported-info__form-title">Name</h5>
@@ -97,7 +111,7 @@ export class ReportedInfoPage extends HTMLElement {
                     </label>
                     <label class="reported-info__form-label">
                             <h5 class="reported-info__form-title">Contact</h5>
-                            <h4 class="reported-info__form-data pet-email">${petUserEmail}</h4>
+                            <h4 class="reported-info__form-data pet-email">${petEmail}</h4>
                     </label>
                 </form>
                 <button class="reported-info__form-button open-info">Add Info</button>
@@ -303,6 +317,7 @@ export class ReportedInfoPage extends HTMLElement {
 
         `
         this.appendChild(style)    
+        this.addButtons();    
     }
 }
 

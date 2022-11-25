@@ -1,5 +1,6 @@
 /* Imports */
 import { Router } from "@vaadin/router";
+import { state } from "../state"
 
 /* Variables */
 const style = document.createElement("style")
@@ -14,10 +15,22 @@ export class ReportPage extends HTMLElement {
         this.render()
 
         /* Publicar */
-        const publicar: any = this.querySelector(".public")
-        publicar.addEventListener("click", ()=>{
-            console.log("Nueva Publicación")
-            Router.go("/reports")
+        const publicar: any = this.querySelector(".report__form")
+        publicar.addEventListener("submit", (e)=>{
+            e.preventDefault();
+            const petInfo = {
+                petName: e.target["pet-name"].value,
+                petBreed: e.target["pet-breed"].value,
+                petLocation: e.target["pet-location"].value,
+                petDescription: e.target["pet-description"].value,
+                // petMap: e.target["pet-map"].value,
+                // petPhoto: e.target["pet-photo"].value
+            }
+            console.log(petInfo)
+            state.newPet(petInfo)
+            .then(()=>{
+                Router.go("/home")
+            })
         })
 
         /* Sign Out */

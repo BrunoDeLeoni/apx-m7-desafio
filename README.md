@@ -57,3 +57,13 @@ Versión 1.4
 * Actulización de 'my-data' y 'my-data-update'
 * Creación de paginas restantes
 * Prototipo de Front-End finalizado
+
+Versión 1.5
+*Update Web*
+* Update del front
+* Sync a la Bases de Datos
+* Creación/Modificación de User
+* Creación de Mascotas Perdidas
+* Info de Mascotas Perdidas para Visitantes
+* Info de Mascotas Perdidas para User
+* Info de Mascotas Perdidas para Creadores

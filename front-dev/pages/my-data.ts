@@ -35,10 +35,10 @@ export class MyDataPage extends HTMLElement {
     }
 
     render(){
-        /* Temporal */
-        userUsername = state.getState().username
-        userFullname = state.getState().userFullname
-        userEmail = state.getState().userEmail
+        const currentState = state.getState()
+        userUsername = currentState.username
+        userFullname = currentState.userFullname
+        userEmail = currentState.userEmail
 
         this.className = "my-data"
         this.innerHTML = 
