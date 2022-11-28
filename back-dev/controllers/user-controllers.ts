@@ -25,7 +25,7 @@ export async function userCreate(data){
     })
     const [authNew, authNewCreate] = await Auth.findOrCreate({
         where:{
-            userId: userNew.get("id"),
+            UserId: userNew.get("id"),
         },
         defaults:{
             username,
@@ -47,7 +47,7 @@ export async function userAuth(data, TOKEN_SECRET){
     try{
         const data = jwt.sign(
             {
-                id: auth.get("userId")
+                id: auth.get("UserId")
             }, TOKEN_SECRET )
         return data
     }

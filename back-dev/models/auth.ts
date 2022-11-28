@@ -4,7 +4,7 @@ import { sequelize } from "../database/connection"
 class Auth extends Model{};
 
 Auth.init({
-        userId: DataTypes.INTEGER,
+        UserId: DataTypes.INTEGER,
         username: DataTypes.STRING,
         userPassword: DataTypes.STRING        
     },

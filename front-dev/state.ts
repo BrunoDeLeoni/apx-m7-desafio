@@ -16,6 +16,7 @@ const state = {
         petBreed: "",
         petLocation: "",
         petDescription: "",
+        petInfo: "",
         petEmail: "",
     },
     
@@ -218,6 +219,33 @@ const state = {
         })
     },
 
+    /* Info: Busca la información añadida por otros usuarios */
+    petMyReportsInfoAdd(petId){
+        const currentState = this.getState();
+        return fetch(API_BASE_URL + "/pet-my-reports-info-add", {
+            method: 'POST',
+            headers: {
+                "content-type": "application/json",
+                Authorization: `brearer ${currentState.token}`
+            },
+            body: JSON.stringify(
+                currentState
+            )
+        })
+        .then((res)=>{
+            return res.json()
+        })
+        .then((data)=>{
+            const itemCollections = data.map((item)=>{
+                return {
+                    userInfo: item.User.userEmail,
+                    petInfo: item.petInfo
+                }
+            })
+            return itemCollections
+        })
+    },
+
     /* Pet: Ver las mascotas perdidas activas */
     petReported(){
         return fetch(API_BASE_URL + "/pet-reported")
@@ -256,10 +284,26 @@ const state = {
         })
     },
 
-    /* Pet: Añado información a una mascota reportada */
-    petReportedInfoAdd(petInfo){
-        console.log(petInfo)
-        /* Tomo la informacion y la almaceno */
+    /* Pet: Añado informacion a mascota reportada */
+    petReportedInfoAdd(petAdd){
+        const currentState = this.getState();
+        currentState.petInfo = petAdd;
+        return fetch(API_BASE_URL + "/pet-reported-info-add", {
+            method: 'POST',
+            headers: {
+                "content-type": "application/json",
+                Authorization: `brearer ${currentState.token}`,
+            },
+            body: JSON.stringify(
+                currentState
+            )
+        })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data)=>{
+            return data
+        })
     },
 
     /* Search Active */
@@ -269,6 +313,27 @@ const state = {
         } else {
             return "DESACTIVE"
         }
+    },
+
+    /* Pet: Status Search */
+    changeSearch(){
+        const currentState = this.getState();
+        return fetch(API_BASE_URL + "/change-search", {
+            method: 'put',
+            headers: {
+                "content-type": "application/json",
+                Authorization: `brearer ${currentState.token}`,
+            },
+            body: JSON.stringify(
+                currentState
+            )
+        })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data)=>{
+            return true
+        })
     },
 
     /* Subscribe */

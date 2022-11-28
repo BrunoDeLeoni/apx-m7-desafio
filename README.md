@@ -67,3 +67,13 @@ Versión 1.5
 * Info de Mascotas Perdidas para Visitantes
 * Info de Mascotas Perdidas para User
 * Info de Mascotas Perdidas para Creadores
+
+Versión 1.6
+*Prototipo Web Finish*
+* Se puede modificar el estado de las mascotas publicadas
+* Se puede añadir información de mascotas vistas
+* Se puede visualizar información de usuarios sobre nuestras mascotas
+* Creación de la DB Info y su respectivo controllers
+* Falta MAP y PHOTO
+* Falta corrección del BUG al mostrar los datos
+

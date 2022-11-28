@@ -1,5 +1,5 @@
 /* Imports */
-import { User, Pet } from "../models"
+import { User, Pet, Info } from "../models"
 
 /* Pet: Crear una nueva mascota perdida */
 export async function petCreate(userId, data){
@@ -35,12 +35,6 @@ export async function petMyReports(userId){
     return petSearch
 }
 
-/* Pet: Informacion de una mascota que reporte */
-export async function petMyReportsInfo(petId){
-    const petSearch = await Pet.findByPk(petId)
-    return petSearch
-}
-
 /* Pet: Todas las mascotas reportadas activas */
 export async function petReported(){
     const petSearch = await Pet.findAll({
@@ -51,10 +45,25 @@ export async function petReported(){
     return petSearch
 }
 
-/* Pet: Informacion de una mascota reportada */
-export async function petReportedInfo(petId){
-    const petSearch = await Pet.findByPk(petId, {
-        include: [User]
-    })
-    return petSearch
+/* Pet: Function Status */
+function changeOption(data){
+    const { petActive } = data
+    if(petActive == true){
+        return false
+    } else {
+        return true
+    }
+}
+
+/* Pet: Status Search */
+export async function changeSearch(data){
+    const option = changeOption(data)    
+    const petUpdate = await Pet.update({
+        petActive: option
+    }, {
+        where: {
+            id: data.petId
+        }
+    });
+    return petUpdate
 }

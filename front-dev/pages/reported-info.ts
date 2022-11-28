@@ -54,7 +54,10 @@ export class ReportedInfoPage extends HTMLElement {
         sendInfo.addEventListener("submit", (e)=>{
             e.preventDefault();
             state.petReportedInfoAdd(e.target["info"].value)
-            boxInfo.style.display = "none"
+            .then(()=>{
+                boxInfo.style.display = "none"
+                Router.go("/reported")
+            })
         })
         closeInfo.addEventListener("click", ()=>{
             boxInfo.style.display = "none"

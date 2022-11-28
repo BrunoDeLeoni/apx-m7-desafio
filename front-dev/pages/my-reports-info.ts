@@ -13,6 +13,8 @@ export class MyReportsInfoPage extends HTMLElement {
 
     /* Connected to Callback */
     connectedCallback(){
+        const currentState = state.getState()
+
         state.subscribe(() => {
             const currentState = state.getState()
             petName = currentState.petName,
@@ -22,21 +24,35 @@ export class MyReportsInfoPage extends HTMLElement {
             petDescription = currentState.petDescription,
             petPhoto = "",
             petSearch = state.searchActive(currentState.petActive),
-            petInfoUser = "brunodeleoni",
-            petInfoDescription = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis repellat sunt deserunt at. Aliquam voluptate nisi quisquam rem molestiae, nobis earum cum laborum in magni, illum aliquid reiciendis porro dignissimos!"
+            
+            state.petMyReportsInfoAdd(currentState.petId)
+            .then((item)=>{
+                console.log(item)
+                const template: any = this.querySelector(".my-reports-info__info-div");
+                const container: any = this.querySelector(".my-reports-info__info");
+                for (const i of item){
+                    template.querySelector(".my-reports-info__info-title").textContent = i.userInfo;
+                    template.querySelector(".my-reports-info__info-data").textContent = i.petInfo;
+                    const clone = document.importNode(template, true);
+                    container.appendChild(clone);
+                }
+            })
             
             this.render();
             
         })
-
+        
         this.render();
+
     }
 
     addButtons(){
         /* Search Active/Desactive */
         const search: any = this.querySelector(".search-desactive")
         search.addEventListener("click", ()=>{
-            console.log("Activa o Desactiva la publicación")
+            console.log("Click")
+            state.changeSearch()
+            Router.go("/reports")
         })
 
         /* Sign Out */
@@ -96,15 +112,15 @@ export class MyReportsInfoPage extends HTMLElement {
                         <h5 class="my-reports-info__form-title">Search</h5>
                         <h4 class="my-reports-info__form-data pet-search">${petSearch}</h4>
                     </label>
-                    <button class="my-reports-info__form-button search-desactive">Change Search</button>
                 </form>
+                <button class="my-reports-info__form-button search-desactive">Change Search</button>
                 </br> 
                 <h2>Reports Info</h2>
                 <div class="my-reports-info__info info">
-                    <label class="my-reports-info__info-label">
-                        <h5 class="my-reports-info__info-title info-user">User: ${petInfoUser}</h5>
-                        <h4 class="my-reports-info__info-data info-description">${petInfoDescription}</h4>
-                    </label>
+                    <div class="my-reports-info__info-div">
+                        <h5 class="my-reports-info__info-title" name="info-user"></h5>
+                        <h4 class="my-reports-info__info-data" name="info-description"></h4>
+                    </div>
                 </div>
             </div>
             <div class="my-reports-info__footer">
@@ -237,11 +253,11 @@ export class MyReportsInfoPage extends HTMLElement {
             gap: 15px;
             font-size: 25px
         }
-        .my-reports-info__info-label{
+        .my-reports-info__info-div{
             width: 100%;
         }
         @media (min-width: 1024px){
-            .my-reports-info__info-label{
+            .my-reports-info__info-div{
                 width: 730px;
             }
         }

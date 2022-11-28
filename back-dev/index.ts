@@ -1,7 +1,8 @@
 /* Imports */
 import { userCreate, userAuth, userData, userUpdate } from "./controllers/user-controllers";
-import { petCreate, petVisit, petMyReports, petReported, petMyReportsInfo, petReportedInfo } from "./controllers/pet-controllers"
-import { User, Auth, Pet } from "./models";
+import { petCreate, petVisit, petMyReports, petReported, changeSearch } from "./controllers/pet-controllers";
+import { petMyReportsInfo, petReportedInfo, petReportedInfoAdd, petMyReportsInfoAdd } from "./controllers/info-controllers";
+import { User, Auth, Pet, Info } from "./models";
 import * as express from "express";
 import * as path from "path";
 import * as jwt from "jsonwebtoken";
@@ -39,10 +40,12 @@ app.get("/database", async (req, res) => {
     const user = await User.findAll();
     const auth = await Auth.findAll();
     const pet = await Pet.findAll();
+    const info = await Info.findAll();
     res.json({
         user, 
         auth,
-        pet
+        pet,
+        info
     });
 });
 
@@ -205,6 +208,54 @@ app.get("/pet-reported-info/:petId", async (req, res) => {
         res.status(401).json({ error: e})
     }
 });
+
+/* Pet: Añado informacion a mascota reportada */
+app.post("/pet-reported-info-add", authMiddleware, async (req, res) => {
+    if(!req.body){
+        res.status(400).json({
+            message: "Not Data"
+        })
+    }
+    const response = await petReportedInfoAdd(req._user.id, req.body)
+    try{
+        res.json(response)
+    }
+    catch (e){
+        res.status(401).json({ error: e})
+    }
+});
+
+/* Info: Busca la información añadida por otros usuarios */
+app.post("/pet-my-reports-info-add", async (req, res) => {
+    if(!req.body){
+        res.status(400).json({
+            message: "Not Data"
+        })
+    }
+    const response = await petMyReportsInfoAdd(req.body)
+    try{
+        res.json(response)
+    }
+    catch (e){
+        res.status(401).json({ error: e})
+    }
+});
+
+/* Pet: Status Search */
+app.put("/change-search", async (req, res) => {
+    if(!req.body){
+        res.status(400).json({
+            message: "Not Data"
+        })
+    }
+    const response = await changeSearch(req.body)
+    try{
+        res.json(response)
+    }
+    catch (e){
+        res.status(401).json({ error: e})
+    }
+})
 
 /* Web - Home */
 app.get("*", (req, res) => {
