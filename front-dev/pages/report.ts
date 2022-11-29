@@ -1,6 +1,7 @@
 /* Imports */
 import { Router } from "@vaadin/router";
-import { state } from "../state"
+import { state } from "../state";
+import { Dropzone } from "dropzone";
 
 /* Variables */
 const style = document.createElement("style")
@@ -14,22 +15,37 @@ export class ReportPage extends HTMLElement {
     connectedCallback(){
         this.render()
 
+        /* Upload Photo */
+        let photo;
+        const myDropzone = new Dropzone(".pet-photo", {
+            url: "/falsa",
+            autoProcessQueue: false,
+        });
+        myDropzone.on("addedfile", function (file) {
+            photo = file;
+        });
+
         /* Publicar */
         const publicar: any = this.querySelector(".report__form")
         publicar.addEventListener("submit", (e)=>{
             e.preventDefault();
+            console.log("Creando una nueva mascota perdida")
             const petInfo = {
                 petName: e.target["pet-name"].value,
                 petBreed: e.target["pet-breed"].value,
                 petLocation: e.target["pet-location"].value,
                 petDescription: e.target["pet-description"].value,
+                petPhoto: photo.dataURL,
                 // petMap: e.target["pet-map"].value,
-                // petPhoto: e.target["pet-photo"].value
             }
-            console.log(petInfo)
             state.newPet(petInfo)
-            .then(()=>{
-                Router.go("/home")
+            .then((data)=>{
+                if(data == true){
+                    console.log("Nueva Mascota:", petInfo.petName)
+                    Router.go("/home")
+                } else {
+                    alert("Falta Datos")
+                }
             })
         })
 
@@ -62,19 +78,19 @@ export class ReportPage extends HTMLElement {
                 <form class="report__form">
                     <label class="report__form-label">
                         <h5 class="report__form-title">Name</h5>
-                        <input class="report__form-data pet-name" name="pet-name" placeholder="Toto">
+                        <input class="report__form-data pet-name" name="pet-name" placeholder="Toto" required>
                     </label>
                     <label class="report__form-label">
                         <h5 class="report__form-title">Breed</h5>
-                        <input class="report__form-data pet-breed" name="pet-breed" placeholder="Dog">
+                        <input class="report__form-data pet-breed" name="pet-breed" placeholder="Dog" required>
                     </label>
                     <label class="report__form-label">
                         <h5 class="report__form-title">Location</h5>
-                        <input class="report__form-data pet-location" name="pet-location" placeholder="Córdoba">
+                        <input class="report__form-data pet-location" name="pet-location" placeholder="Córdoba" required>
                     </label>
                     <label class="report__form-label">
                         <h5 class="report__form-title">Description</h5>
-                        <textarea class="report__form-text pet-description" name="pet-description" placeholder="Mastin Napolitano. Gris. 4 ños. Collar de cuero."></textarea>
+                        <textarea class="report__form-text pet-description" name="pet-description" placeholder="Mastin Napolitano. Gris. 4 ños. Collar de cuero." required></textarea>
                     </label>
                     <label class="report__form-label">
                         <h5 class="report__form-title">Map</h5>
@@ -82,7 +98,7 @@ export class ReportPage extends HTMLElement {
                     </label>
                     <label class="report__form-label">
                         <h5 class="report__form-title">Upload Photo</h5>
-                        <div class="report__form-photo pet-photo" name="pet-photo"></div>
+                        <div class="report__form-photo pet-photo" name="pet-photo" required></div>
                     </label>
                     <button class="report__body-button public">Public</button>
                 </form>
@@ -206,6 +222,9 @@ export class ReportPage extends HTMLElement {
             width: 100%;
             background: #37474f70;
             border: dashed #607d8b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .report__body-button{
@@ -225,6 +244,14 @@ export class ReportPage extends HTMLElement {
         .report__footer{
             display: flex;
             height: 5vh;
+        }
+
+        .dz-details,
+        .dz-progress,
+        .dz-success-mark,
+        .dz-error-mark,
+        .dz-error-message{
+            display: none;
         }
 
         `

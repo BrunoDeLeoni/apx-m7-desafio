@@ -6,7 +6,7 @@ import { state } from "../state"
 const style = document.createElement("style")
 const backIMG = require("url:../assets/back.png")
 const signoutIMG = require("url:../assets/signout.png")
-let petName, petBreed, petLocation, petDescription, petMap, petPhoto, petSearch,petInfoUser, petInfoDescription;
+let petName, petBreed, petLocation, petDescription, petMap, petPhoto, petSearch;
 
 /* Class Report */
 export class MyReportsInfoPage extends HTMLElement {
@@ -22,12 +22,11 @@ export class MyReportsInfoPage extends HTMLElement {
             petLocation = currentState.petLocation,
             petMap = [{lat: "7,29", lon: "7,31"}],
             petDescription = currentState.petDescription,
-            petPhoto = "",
+            petPhoto = currentState.petPhoto,
             petSearch = state.searchActive(currentState.petActive),
             
             state.petMyReportsInfoAdd(currentState.petId)
             .then((item)=>{
-                console.log(item)
                 const template: any = this.querySelector(".my-reports-info__info-div");
                 const container: any = this.querySelector(".my-reports-info__info");
                 for (const i of item){
@@ -50,7 +49,6 @@ export class MyReportsInfoPage extends HTMLElement {
         /* Search Active/Desactive */
         const search: any = this.querySelector(".search-desactive")
         search.addEventListener("click", ()=>{
-            console.log("Click")
             state.changeSearch()
             Router.go("/reports")
         })
@@ -106,7 +104,7 @@ export class MyReportsInfoPage extends HTMLElement {
                     </label>
                     <label class="my-reports-info__form-label">
                         <h5 class="my-reports-info__form-title">Photos</h5>
-                        <img class="my-reports-info__form-photo pet-photo" name="pet-photo" src="${petPhoto}">
+                        <img class="my-reports-info__form-photo pet-photo" src="${petPhoto}">
                     </label>
                     <label class="my-reports-info__form-label">
                         <h5 class="my-reports-info__form-title">Search</h5>

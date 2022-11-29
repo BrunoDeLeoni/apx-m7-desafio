@@ -14,18 +14,33 @@ export class MyReportsPage extends HTMLElement {
     connectedCallback(){
         this.render()
         
+        /* List Item */
+        const list: any = this.querySelector(".my-reports__body")
+        list.innerHTML = 
+        `
+        <div class="my-reports__body-box">
+            <img class="my-reports__body-box-img" src="">
+            <div class="my-reports__body-box-info">
+                <h4 class="my-reports__body-box-info-title"></h4>
+                <h6 class="my-reports__body-box-info-subtitle"></h6>
+            </div>
+            <a class="ver-mas" id="">ver mas...</a>
+        </div>
+        `
+
         /* Add Items */
         state.petMyReports()
         .then((item)=>{
             const template: any = this.querySelector(".my-reports__body-box");
             const container: any = this.querySelector(".my-reports__body");
-            for (const i of item){
+            item.forEach(i => {
+                template.querySelector(".my-reports__body-box-img").src = i.petPhoto;
                 template.querySelector(".my-reports__body-box-info-title").textContent = i.petName;
                 template.querySelector(".my-reports__body-box-info-subtitle").textContent = i.petLocation;
                 template.querySelector(".ver-mas").id = i.id;
                 const clone = document.importNode(template, true);
                 container.appendChild(clone);
-             }
+            })
         })
 
         /* Ver Mas */
@@ -62,14 +77,6 @@ export class MyReportsPage extends HTMLElement {
                 </div>
             </div>
             <div class="my-reports__body">
-                <div class="my-reports__body-box">
-                    <img class="my-reports__body-box-img" src="">
-                    <div class="my-reports__body-box-info">
-                        <h4 class="my-reports__body-box-info-title"></h4>
-                        <h6 class="my-reports__body-box-info-subtitle"></h6>
-                    </div>
-                    <a class="ver-mas" id="">ver mas...</a>
-                </div>
             </div>
             <div class="my-reports__footer">
             </div>

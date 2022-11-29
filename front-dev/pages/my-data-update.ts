@@ -35,7 +35,6 @@ export class MyDataUpdatePage extends HTMLElement {
                 userFullname: e.target["update-fullname"].value,
                 userEmail: e.target["update-email"].value
             }
-            console.log(update)
             state.userUpdate(update)
             .then((data)=>{
                 if(data[0] === 1){
@@ -47,7 +46,6 @@ export class MyDataUpdatePage extends HTMLElement {
         /* Cancel */
         const cancel: any = this.querySelector(".cancel")
         cancel.addEventListener("click", ()=>{
-            console.log("Cancelar")
             Router.go("/user")
         })
     }

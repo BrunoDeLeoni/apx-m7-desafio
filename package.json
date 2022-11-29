@@ -15,6 +15,7 @@
     "concurrently": "^7.5.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
+    "dropzone": "^6.0.0-beta.2",
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
@@ -25,7 +26,7 @@
   },
   "scripts": {
     "dev:front": "parcel serve './front-dev/index.html'",
-    "dev:back": "nodemon --watch './back-dev/index.ts' --exec 'ts-node ./back-dev/index.ts'",
+    "dev:back": "nodemon --watch './back-dev/index.ts' --exec 'ts-node ./back-dev/dev.ts'",
     "dev:sync": "ts-node ./back-dev/database/sync"
   }
 }

@@ -6,7 +6,7 @@ import { state } from "../state"
 const style = document.createElement("style")
 const backIMG = require("url:../assets/back.png")
 const signoutIMG = require("url:../assets/signout.png")
-let petName, petBreed, petEmail, petDescription, petLocation, petUserEmail, petMap, petPhoto;
+let petName, petBreed, petEmail, petDescription, petLocation, petMap, petPhoto;
 
 /* Class Report */
 export class ReportedInfoPage extends HTMLElement {
@@ -20,7 +20,7 @@ export class ReportedInfoPage extends HTMLElement {
             petLocation = currentState.petLocation,
             petMap = [{lat: "7,29", lon: "7,31"}],
             petDescription = currentState.petDescription,
-            petPhoto = "",
+            petPhoto = currentState.petPhoto,
             petEmail = currentState.petEmail,
 
             this.render();
@@ -80,7 +80,7 @@ export class ReportedInfoPage extends HTMLElement {
                 <form class="reported-add__form">
                     <label class="reported-add__form-label">
                         <h5 class="reported-add__form-title">Information</h5>
-                        <textarea class="reported-add__form-data" name="info" placeholder="Entre al RP4 y RN8, en las cercanias al Anti-Aereo"></textarea>
+                        <textarea class="reported-add__form-data" name="info" placeholder="Entre al RP4 y RN8, en las cercanias al Anti-Aereo" required></textarea>
                     </label>
                     <button class="reported-add__button send-info">Send</button>
                     <button class="reported-add__button close-info">Cancel</button>
@@ -110,7 +110,7 @@ export class ReportedInfoPage extends HTMLElement {
                     </label>
                         <label class="reported-info__form-label">
                         <h5 class="reported-info__form-title">Photos</h5>
-                        <img class="reported-info__form-photo pet-photo" name="pet-photo" src="${petPhoto}">
+                        <img class="reported-info__form-photo pet-photo" src="${petPhoto}">
                     </label>
                     <label class="reported-info__form-label">
                             <h5 class="reported-info__form-title">Contact</h5>

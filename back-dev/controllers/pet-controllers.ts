@@ -1,18 +1,48 @@
 /* Imports */
-import { User, Pet, Info } from "../models"
+import { Pet } from "../models"
+import { cloudinary } from "../lib/cloudinary"
 
 /* Pet: Crear una nueva mascota perdida */
 export async function petCreate(userId, data){
-    const { petName, petBreed, petLocation, petDescription } = data
+    const { petName, petBreed, petLocation, petDescription, petPhoto } = data
+    const image = await cloudinary.uploader.upload(petPhoto, {
+        resource_type: "image",
+        discard_original_filename: true,
+        width: 1000
+    })
     const petNew = await Pet.create({
         petActive: true,
         petName,
         petBreed,
         petLocation,
         petDescription,
+        petPhoto: image.secure_url,
         UserId: userId,
     })
     return petNew;
+}
+
+/* Pet: Chequea el estado actual de la mascota */
+function changeOption(data){
+    const { petActive } = data
+    if(petActive == true){
+        return false
+    } else {
+        return true
+    }
+}
+
+/* Pet: Cambia el estado de la mascota perdida */
+export async function changeSearch(data){
+    const option = changeOption(data)    
+    const petUpdate = await Pet.update({
+        petActive: option
+    }, {
+        where: {
+            id: data.petId
+        }
+    });
+    return petUpdate
 }
 
 /* Pet: Todas las mascotas buscadas activas en ghost */
@@ -43,27 +73,4 @@ export async function petReported(){
         }
     })
     return petSearch
-}
-
-/* Pet: Function Status */
-function changeOption(data){
-    const { petActive } = data
-    if(petActive == true){
-        return false
-    } else {
-        return true
-    }
-}
-
-/* Pet: Status Search */
-export async function changeSearch(data){
-    const option = changeOption(data)    
-    const petUpdate = await Pet.update({
-        petActive: option
-    }, {
-        where: {
-            id: data.petId
-        }
-    });
-    return petUpdate
 }

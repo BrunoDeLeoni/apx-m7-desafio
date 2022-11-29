@@ -9,7 +9,7 @@ import * as jwt from "jsonwebtoken";
 import * as cors from "cors";
 
 /* Varibales */
-const TOKEN_SECRET = process.env.TOKEN_SECRET || "BrunoKeyTokenSecret"
+const TOKEN_SECRET = process.env.TOKEN_SECRET
 const staticDirPath = path.resolve(__dirname, "../front-dev");
 const port = process.env.PORT || 3000;
 const app = express();
@@ -49,7 +49,7 @@ app.get("/database", async (req, res) => {
     });
 });
 
-/* Usuarios: Registrar un nuevo usuario */
+/* User: Registrar un nuevo usuario */
 app.post("/new-user", async (req, res) => {
     if(!req.body){
         res.status(400).json({
@@ -65,7 +65,7 @@ app.post("/new-user", async (req, res) => {
     }
 });
 
-/* Usuarios: Login - Authorization */
+/* User: Login - Authorization */
 app.post("/login", async (req, res) => {
     if(!req.body){
         res.status(400).json({
@@ -81,7 +81,7 @@ app.post("/login", async (req, res) => {
     }
 });
 
-/* Me: Data del usuario logueado */
+/* User: Data del usuario logueado */
 app.get("/me", authMiddleware, async (req, res) => {
     if(!req.body){
         res.status(400).json({
@@ -97,7 +97,7 @@ app.get("/me", authMiddleware, async (req, res) => {
     }
 });
 
-/* Me: Actualizar el usuario logueado */
+/* User: Actualizar el usuario logueado */
 app.put("/me", authMiddleware, async (req, res) => {
     if(!req.body){
         res.status(400).json({
@@ -161,7 +161,7 @@ app.get("/pet-my-reports", authMiddleware, async (req, res) => {
     }
 });
 
-/* Pet: Ver información de una mascota reportada por mi */
+/* Info: Ver información de una mascota reportada por mi */
 app.get("/pet-my-reports-info/:petId", async (req, res) => {
     if(!req.body){
         res.status(400).json({
@@ -193,7 +193,7 @@ app.get("/pet-reported", async (req, res) => {
     }
 });
 
-/* Pet: Ver información de una mascota reportada */
+/* Info: Ver información de una mascota reportada */
 app.get("/pet-reported-info/:petId", async (req, res) => {
     if(!req.body){
         res.status(400).json({
@@ -209,7 +209,7 @@ app.get("/pet-reported-info/:petId", async (req, res) => {
     }
 });
 
-/* Pet: Añado informacion a mascota reportada */
+/* Info: Añado informacion a mascota reportada */
 app.post("/pet-reported-info-add", authMiddleware, async (req, res) => {
     if(!req.body){
         res.status(400).json({

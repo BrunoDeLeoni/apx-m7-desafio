@@ -10,8 +10,8 @@ Pet.init({
     petBreed: DataTypes.STRING,
     petLocation: DataTypes.STRING,
     petDescription: DataTypes.TEXT,
+    petPhoto: DataTypes.STRING,
     // petMap: DataTypes.ARRAY,
-    // petPhoto: DataTypes.STRING,
 },
 {
     sequelize,

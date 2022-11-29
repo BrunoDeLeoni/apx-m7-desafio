@@ -16,6 +16,7 @@ const state = {
         petBreed: "",
         petLocation: "",
         petDescription: "",
+        petPhoto: "",
         petInfo: "",
         petEmail: "",
     },
@@ -41,7 +42,7 @@ const state = {
         }
     },
     
-    /* Usuarios: Crear */
+    /* User: Crear un nuevo usuario */
     newUser(dataUser){
         return fetch(API_BASE_URL + "/new-user", {
             method: 'POST',
@@ -60,7 +61,7 @@ const state = {
         })
     },
 
-    /* Usuarios: Login */
+    /* User: Login */
     loginUser(dataUser){
         const currentState = this.getState();
         return fetch(API_BASE_URL + "/login", {
@@ -87,7 +88,7 @@ const state = {
         })
     },
 
-    /* Me: Mi Data */
+    /* User: Mis datos */
     userData(){
         const currentState = this.getState();
         const {token} = currentState
@@ -109,7 +110,7 @@ const state = {
         })
     },
 
-    /* Me: Actualizar mi Data */
+    /* User: Actualizar mis datos */
     userUpdate(dataUser){
         const currentState = this.getState();
         const {token} = currentState
@@ -151,8 +152,8 @@ const state = {
         .then((res) => {
             return res.json()
         })
-        .then((data)=>{
-            console.log(data)
+        .then(()=>{
+            return true
         })
     },
 
@@ -165,16 +166,16 @@ const state = {
         .then((data)=>{
             const itemCollections = data.map((item)=>{
                 return {
-                    // petPhoto: item.petPhoto
                     petName: item.petName,
-                    petLocation: item.petLocation
+                    petLocation: item.petLocation,
+                    petPhoto: item.petPhoto
                 }
             })
             return itemCollections
         })
     },
 
-    /* Pet: Ver mis reportes de mascotas perdidas */
+    /* Pet: Ver mis mascotas reportadas como perdidas */
     petMyReports(){
         const currentState = this.getState();
         const {token} = currentState
@@ -191,8 +192,8 @@ const state = {
         .then((data)=>{
             const itemCollections = data.map((item)=>{
                 return {
-                    // petPhoto: item.petPhoto
                     id: item.id,
+                    petPhoto: item.petPhoto,
                     petName: item.petName,
                     petLocation: item.petLocation
                 }
@@ -201,7 +202,7 @@ const state = {
         })
     }, 
 
-    /* Pet: Ver información de una mascota que reporte */
+    /* Info: Ver información de una mascota que reporte */
     petMyReportsInfo(petId){
         const currentState = this.getState()
         return fetch(API_BASE_URL + "/pet-my-reports-info/" + petId)
@@ -214,12 +215,13 @@ const state = {
             currentState.petActive = data.petActive,
             currentState.petBreed = data.petBreed,
             currentState.petLocation = data.petLocation,
+            currentState.petPhoto = data.petPhoto,
             currentState.petDescription = data.petDescription
             this.setState(currentState)
         })
     },
 
-    /* Info: Busca la información añadida por otros usuarios */
+    /* Info: Busca la información añadida por otros usuarios de una mascota que reporte */
     petMyReportsInfoAdd(petId){
         const currentState = this.getState();
         return fetch(API_BASE_URL + "/pet-my-reports-info-add", {
@@ -255,8 +257,8 @@ const state = {
         .then((data)=>{
             const itemCollections = data.map((item)=>{
                 return {
-                    // petPhoto: item.petPhoto
                     id: item.id,
+                    petPhoto: item.petPhoto,
                     petName: item.petName,
                     petLocation: item.petLocation
                 }
@@ -265,7 +267,7 @@ const state = {
         })
     },
 
-    /* Pet: Ver información de una mascota reportada */
+    /* Info: Ver información de una mascota reportada */
     petReportedInfo(petId){
         const currentState = this.getState()
         return fetch(API_BASE_URL + "/pet-reported-info/" + petId)
@@ -277,6 +279,7 @@ const state = {
             currentState.petName = data.petName,
             currentState.petActive = data.petActive,
             currentState.petBreed = data.petBreed,
+            currentState.petPhoto = data.petPhoto,
             currentState.petLocation = data.petLocation,
             currentState.petDescription = data.petDescription,
             currentState.petEmail = data.User.userEmail
@@ -284,7 +287,7 @@ const state = {
         })
     },
 
-    /* Pet: Añado informacion a mascota reportada */
+    /* Info: Añado informacion a mascota reportada */
     petReportedInfoAdd(petAdd){
         const currentState = this.getState();
         currentState.petInfo = petAdd;
@@ -306,7 +309,7 @@ const state = {
         })
     },
 
-    /* Search Active */
+    /* Verificar si la busqueda de una mascota esta Activa o No */
     searchActive(search){
         if(search == true){
             return "ACTIVE"
@@ -315,7 +318,7 @@ const state = {
         }
     },
 
-    /* Pet: Status Search */
+    /* Pet: Cambiar el estado de una mascota reportada */
     changeSearch(){
         const currentState = this.getState();
         return fetch(API_BASE_URL + "/change-search", {

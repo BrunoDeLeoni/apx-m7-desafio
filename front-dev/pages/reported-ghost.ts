@@ -12,20 +12,36 @@ export class ReportedGhostPage extends HTMLElement {
     /* Connected to Callback */
     connectedCallback(){
         this.render()
-        
+
+        /* List Items */
+        const list: any = this.querySelector(".reported__body")
+        list.innerHTML = 
+        `
+        <div class="reported__body-container">
+            <div class="reported__body-box">
+                <img class="reported__body-box-img" src="">
+                <div class="reported__body-box-info">
+                    <h4 class="reported__body-box-info-title"></h4>
+                    <h6 class="reported__body-box-info-subtitle"></h6>
+                </div>
+            </div>
+        </div>
+        `
+
         /* Add Items */
         state.petVisit()
         .then((item)=>{
             const template: any = this.querySelector(".reported__body-box");
             const container: any = this.querySelector(".reported__body-container");
-            for (const i of item){
+            item.forEach(i => {
+                template.querySelector(".reported__body-box-img").src = i.petPhoto;
                 template.querySelector(".reported__body-box-info-title").textContent = i.petName;
                 template.querySelector(".reported__body-box-info-subtitle").textContent = i.petLocation;
                 const clone = document.importNode(template, true);
                 container.appendChild(clone);
-             }
+            })
         })
-
+        
         /* Back */
         const back: any = this.querySelector(".back")
         back.addEventListener("click", ()=>{
@@ -45,18 +61,7 @@ export class ReportedGhostPage extends HTMLElement {
                     <img class="reported__header-button back" src=${backIMG}>
                 </div>
             </div>
-            <div class="reported__body"> 
-            
-                <div class="reported__body-container">
-                    <div class="reported__body-box">
-                        <img class="reported__body-box-img" src="">
-                        <div class="reported__body-box-info">
-                            <h4 class="reported__body-box-info-title"></h4>
-                            <h6 class="reported__body-box-info-subtitle"></h6>
-                        </div>
-                    </div>
-                </div>
-                    
+            <div class="reported__body">
             </div> 
             <div class="reported__footer">
             </div>
@@ -153,7 +158,6 @@ export class ReportedGhostPage extends HTMLElement {
 
         `
         this.appendChild(style)
-         
     }
 }
 

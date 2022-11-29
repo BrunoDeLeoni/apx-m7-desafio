@@ -17,17 +17,18 @@ export class RegisterPage extends HTMLElement {
         const back: any = this.querySelector(".back")
         register.addEventListener("submit", (e)=>{
             e.preventDefault();
+            console.log("Generando Nuevo Usuario")
             const dataNewUser = {
                 username: e.target["username-name"].value.toLowerCase(),
                 userFullname: e.target["fullname-name"].value,
                 userEmail: e.target["email-name"].value,
                 userPassword: e.target["password-name"].value
             }
-            console.log(dataNewUser)
             if (e.target["password-name"].value === e.target["confirmation-name"].value){
                 state.newUser(dataNewUser)
                 .then((res)=>{
                     if(res == true){
+                        console.log("Nuevo Usuario:", dataNewUser.username)
                         Router.go("/")
                     } else {
                         alert("Usuario No Disponible")

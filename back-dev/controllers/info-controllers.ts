@@ -7,6 +7,17 @@ export async function petMyReportsInfo(petId){
     return petSearch
 }
 
+/* Info: Busca la información añadida por otros usuarios a mi mascota */
+export async function petMyReportsInfoAdd(body){
+    const petInfo = await Info.findAll({
+        where:{
+            PetId: body.petId
+        },
+        include: [User]
+    })
+    return petInfo
+}
+
 /* Info: Mascota reportada por otro usuario */
 export async function petReportedInfo(petId){
     const petSearch = await Pet.findByPk(petId, {
@@ -24,15 +35,4 @@ export async function petReportedInfoAdd(userId, body){
         PetId: petId,
     })
     return petInfoNew
-}
-
-/* Info: Busca la información añadida por otros usuarios */
-export async function petMyReportsInfoAdd(body){
-    const petInfo = await Info.findAll({
-        where:{
-            PetId: body.petId
-        },
-        include: [User]
-    })
-    return petInfo
 }

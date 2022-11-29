@@ -6,7 +6,6 @@ import { state } from "../state";
 const style = document.createElement("style")
 const backIMG = require("url:../assets/back.png")
 const signoutIMG = require("url:../assets/signout.png")
-let petName, petLocation, petPhoto;
 
 /* Class Reported */
 export class ReportedPage extends HTMLElement {
@@ -15,18 +14,33 @@ export class ReportedPage extends HTMLElement {
     connectedCallback(){
         this.render()
 
+        /* List Item */
+        const list: any = this.querySelector(".reported__body")
+        list.innerHTML = 
+        `
+        <div class="reported__body-box">
+            <img class="reported__body-box-img" src="">
+            <div class="reported__body-box-info">
+                <h4 class="reported__body-box-info-title"></h4>
+                <h6 class="reported__body-box-info-subtitle"></h6>
+            </div>
+            <a class="ver-mas" id="">ver mas...</a>
+        </div>
+        `
+
         /* Add Items */
         state.petReported()
         .then((item)=>{
             const template: any = this.querySelector(".reported__body-box");
             const container: any = this.querySelector(".reported__body");
-            for (const i of item){
+            item.forEach(i => {
+                template.querySelector(".reported__body-box-img").src = i.petPhoto;
                 template.querySelector(".reported__body-box-info-title").textContent = i.petName;
                 template.querySelector(".reported__body-box-info-subtitle").textContent = i.petLocation;
                 template.querySelector(".ver-mas").id = i.id;
                 const clone = document.importNode(template, true);
                 container.appendChild(clone);
-             }
+            })
         })
 
         /* Ver Mas */
@@ -63,17 +77,7 @@ export class ReportedPage extends HTMLElement {
                 </div>
             </div>
             <div class="reported__body">
-
-                <div class="reported__body-box">
-                    <img class="reported__body-box-img" src="">
-                    <div class="reported__body-box-info">
-                        <h4 class="reported__body-box-info-title"></h4>
-                        <h6 class="reported__body-box-info-subtitle"></h6>
-                    </div>
-                    <a class="ver-mas" id="">ver mas...</a>
-                </div>
-
-                </div>
+            </div>
             <div class="reported__footer">
             </div>
         </div>

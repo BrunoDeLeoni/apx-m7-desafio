@@ -17,16 +17,17 @@ export class LoginPage extends HTMLElement {
         const back: any = this.querySelector(".back")
         login.addEventListener("submit", (e)=>{
             e.preventDefault();
+            console.log("Ingresando")
             const dataLoginUser = {
                 username: e.target["username-name"].value.toLowerCase(),
                 userPassword: e.target["password-name"].value
             }
-            console.log(dataLoginUser)
             state.loginUser(dataLoginUser)
             .then((res)=>{
                 if(res == false){
                     alert("Usuario o Contraseña Incorrectos")
                 } else {
+                    console.log("Logueado como:", dataLoginUser.username)
                     Router.go("/home")
                 }
             })

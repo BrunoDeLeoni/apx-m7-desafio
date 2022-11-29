@@ -56,13 +56,13 @@ export async function userAuth(data, TOKEN_SECRET){
     }
 }
 
-/* Me - Data */
+/* User: Mi datos */
 export async function userData(userId){
     const data = await User.findByPk(userId)
     return data
 }
 
-/* Me - Update */
+/* User: Verifica que datos voy a modificar */
 function cleanUpdate(data){
     const { userFullname, userEmail } = data
     if(userFullname && userEmail){
@@ -76,7 +76,7 @@ function cleanUpdate(data){
     }
 }
 
-/* Me - Update */
+/* User: Actualizo mis datos */
 export async function userUpdate(userId, data){
     const { userFullname, userEmail } = cleanUpdate(data)    
     const userUpdate = await User.update({

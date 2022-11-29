@@ -77,3 +77,11 @@ Versión 1.6
 * Falta MAP y PHOTO
 * Falta corrección del BUG al mostrar los datos
 
+Versión 1.7
+*Cloudinary*
+* Se pueden subir y almacenar fotos
+* Las cards de las mascotas perdidas ahora se ven con imagen
+* Se organizaron los comentarios para unificarlos
+* Falta MAP
+* Falta corrección del BUG al mostrar los datos
+
