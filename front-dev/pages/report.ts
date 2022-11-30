@@ -2,11 +2,13 @@
 import { Router } from "@vaadin/router";
 import { state } from "../state";
 import { Dropzone } from "dropzone";
+import * as mapboxgl from "mapbox-gl";
 
 /* Variables */
 const style = document.createElement("style")
 const backIMG = require("url:../assets/back.png")
 const signoutIMG = require("url:../assets/signout.png")
+let lng, lat;
 
 /* Class Report */
 export class ReportPage extends HTMLElement {
@@ -14,6 +16,68 @@ export class ReportPage extends HTMLElement {
     /* Connected to Callback */
     connectedCallback(){
         this.render()
+
+        /* MapBox */
+        const MAPBOX_TOKEN = "pk.eyJ1IjoiYnJ1bm9kZWxlb25pIiwiYSI6ImNsOXRkaGpkcTA3amwzdWxnNG1xZ2ExbHAifQ.aod0t9q82plxaMoefaxnEQ";
+        const mapboxClient = new MapboxClient(MAPBOX_TOKEN);
+        const mapContainer: any = this.querySelector(".map-container")
+        /* MapBox: HTML */
+        mapContainer.innerHTML = 
+        `
+        <link href="//api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet"/>
+        <label class="report__form-label">
+            <h5 class="report__form-title">Map</h5>
+            <div class="map-search">
+                <input class="report__form-data map-input" type="search" placeholder="Corrientes 350, Córdoba">
+                <button class="report__body-button map-button">Search</button>
+            </div>
+            <div class="report__form-map pet-map" name="pet-map" id="map"></div>
+        </label>
+        `
+        /* MapBox: Mapa */
+        function initMap(){
+            mapboxgl.accessToken = MAPBOX_TOKEN;
+            const map = new mapboxgl.Map({
+                container: "map",
+                style: "mapbox://styles/mapbox/streets-v11",
+                center: [-63.297, -33.419],
+                zoom: 10
+            });
+            return map
+        }
+        /* MapBox: Busqueda por Nombre*/
+        function initSearchForm(callback) {
+            const mapSearch: any = mapContainer.querySelector(".map-button")
+            mapSearch.addEventListener("click", (e)=>{
+                e.preventDefault()
+                const locSearch = mapContainer.querySelector(".map-input").value
+                mapboxClient.geocodeForward(
+                    locSearch,
+                    {
+                        country: "ar",
+                        autocomplete: true,
+                        language: "es",
+                    },
+                    function (err, data, res) {
+                        if (!err) callback(data.features);
+                    }
+                );
+            });
+        }        /* MapBox: Run */
+        (()=>{
+            let map = initMap()
+            initSearchForm((results)=>{
+                const firstResult = results[0];
+                const marker = new mapboxgl.Marker()
+                .setLngLat(firstResult.geometry.coordinates)
+                .addTo(map)
+                map.setCenter(firstResult.geometry.coordinates);
+                map.setZoom(14);
+                [lng, lat] = firstResult.geometry.coordinates
+                console.log(lng, lat)
+            });
+        })();
+
 
         /* Upload Photo */
         let photo;
@@ -36,7 +100,8 @@ export class ReportPage extends HTMLElement {
                 petLocation: e.target["pet-location"].value,
                 petDescription: e.target["pet-description"].value,
                 petPhoto: photo.dataURL,
-                // petMap: e.target["pet-map"].value,
+                petMapLng: lng,
+                petMapLat: lat,
             }
             state.newPet(petInfo)
             .then((data)=>{
@@ -90,12 +155,10 @@ export class ReportPage extends HTMLElement {
                     </label>
                     <label class="report__form-label">
                         <h5 class="report__form-title">Description</h5>
-                        <textarea class="report__form-text pet-description" name="pet-description" placeholder="Mastin Napolitano. Gris. 4 ños. Collar de cuero." required></textarea>
+                        <textarea class="report__form-text pet-description" name="pet-description" placeholder="Labrador. Beige. 12 Años. Sin collar." required></textarea>
                     </label>
-                    <label class="report__form-label">
-                        <h5 class="report__form-title">Map</h5>
-                        <div class="report__form-map pet-map" name="pet-map"></div>
-                    </label>
+                    <div class="map-container">
+                    </div>
                     <label class="report__form-label">
                         <h5 class="report__form-title">Upload Photo</h5>
                         <div class="report__form-photo pet-photo" name="pet-photo" required></div>
@@ -176,7 +239,6 @@ export class ReportPage extends HTMLElement {
 
         .report__form-label{
             width: 100%;
-            displat: 
         }
         @media (min-width: 1024px){
             .report__form-label{
@@ -241,6 +303,15 @@ export class ReportPage extends HTMLElement {
             }
         }
 
+        .map-container{
+            width: 100%;
+        }
+        @media (min-width: 1024px){
+            .map-container{
+                width: 730px;
+            }
+        }
+
         .report__footer{
             display: flex;
             height: 5vh;
@@ -252,8 +323,11 @@ export class ReportPage extends HTMLElement {
         .dz-error-mark,
         .dz-error-message{
             display: none;
-        }
+            }
 
+        .mapboxgl-control-container{
+            display: none;
+        }
         `
         this.appendChild(style)    
     }

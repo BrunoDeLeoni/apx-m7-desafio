@@ -85,3 +85,8 @@ Versión 1.7
 * Falta MAP
 * Falta corrección del BUG al mostrar los datos
 
+Versión 1.8
+*MapBox*
+* Almacena las mascotas con longitud y latitud
+
+

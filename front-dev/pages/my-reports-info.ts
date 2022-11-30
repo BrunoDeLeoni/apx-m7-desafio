@@ -6,7 +6,7 @@ import { state } from "../state"
 const style = document.createElement("style")
 const backIMG = require("url:../assets/back.png")
 const signoutIMG = require("url:../assets/signout.png")
-let petName, petBreed, petLocation, petDescription, petMap, petPhoto, petSearch;
+let petName, petBreed, petLocation, petDescription, petMapLng, petMapLat, petPhoto, petSearch;
 
 /* Class Report */
 export class MyReportsInfoPage extends HTMLElement {
@@ -20,7 +20,8 @@ export class MyReportsInfoPage extends HTMLElement {
             petName = currentState.petName,
             petBreed = currentState.petBreed,
             petLocation = currentState.petLocation,
-            petMap = [{lat: "7,29", lon: "7,31"}],
+            petMapLng = currentState.petMapLng,
+            petMapLat = currentState.petMapLat,
             petDescription = currentState.petDescription,
             petPhoto = currentState.petPhoto,
             petSearch = state.searchActive(currentState.petActive),
@@ -100,7 +101,7 @@ export class MyReportsInfoPage extends HTMLElement {
                     </label>
                     <label class="my-reports-info__form-label">
                         <h5 class="my-reports-info__form-title">Map</h5>
-                        <div class="my-reports-info__form-map pet-map" name="pet-map">${petMap}</div>
+                        <div class="my-reports-info__form-map pet-map" name="pet-map"></div>
                     </label>
                     <label class="my-reports-info__form-label">
                         <h5 class="my-reports-info__form-title">Photos</h5>

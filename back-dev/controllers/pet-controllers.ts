@@ -4,7 +4,7 @@ import { cloudinary } from "../lib/cloudinary"
 
 /* Pet: Crear una nueva mascota perdida */
 export async function petCreate(userId, data){
-    const { petName, petBreed, petLocation, petDescription, petPhoto } = data
+    const { petName, petBreed, petLocation, petMapLng, petMapLat, petDescription, petPhoto } = data
     const image = await cloudinary.uploader.upload(petPhoto, {
         resource_type: "image",
         discard_original_filename: true,
@@ -16,6 +16,8 @@ export async function petCreate(userId, data){
         petBreed,
         petLocation,
         petDescription,
+        petMapLng,
+        petMapLat,
         petPhoto: image.secure_url,
         UserId: userId,
     })

@@ -17,6 +17,8 @@ const state = {
         petLocation: "",
         petDescription: "",
         petPhoto: "",
+        petMapLng: "",
+        petMapLat: "",
         petInfo: "",
         petEmail: "",
     },
@@ -354,10 +356,7 @@ const state = {
     cleanData(){
         this.setState({
             ...this.data,
-            token: "",
-            username: "",
-            userFullname: "",
-            userEmail: ""
+            token: ""
         })
     },
 

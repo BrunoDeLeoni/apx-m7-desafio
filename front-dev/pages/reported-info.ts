@@ -6,7 +6,7 @@ import { state } from "../state"
 const style = document.createElement("style")
 const backIMG = require("url:../assets/back.png")
 const signoutIMG = require("url:../assets/signout.png")
-let petName, petBreed, petEmail, petDescription, petLocation, petMap, petPhoto;
+let petName, petBreed, petEmail, petDescription, petLocation, petMapLng, petMapLat, petPhoto;
 
 /* Class Report */
 export class ReportedInfoPage extends HTMLElement {
@@ -18,7 +18,8 @@ export class ReportedInfoPage extends HTMLElement {
             petName = currentState.petName,
             petBreed = currentState.petBreed,
             petLocation = currentState.petLocation,
-            petMap = [{lat: "7,29", lon: "7,31"}],
+            petMapLng = currentState.petMapLng,
+            petMapLat = currentState.petMapLat,
             petDescription = currentState.petDescription,
             petPhoto = currentState.petPhoto,
             petEmail = currentState.petEmail,
@@ -53,8 +54,10 @@ export class ReportedInfoPage extends HTMLElement {
         })
         sendInfo.addEventListener("submit", (e)=>{
             e.preventDefault();
+            console.log("Enviando información")
             state.petReportedInfoAdd(e.target["info"].value)
             .then(()=>{
+                console.log("Información enviada")
                 boxInfo.style.display = "none"
                 Router.go("/reported")
             })
@@ -106,7 +109,7 @@ export class ReportedInfoPage extends HTMLElement {
                     </label>
                     <label class="reported-info__form-label">
                         <h5 class="reported-info__form-title">Map</h5>
-                        <div class="reported-info__form-map pet-map" name="pet-map">${petMap}</div>
+                        <div class="reported-info__form-map pet-map" name="pet-map"></div>
                     </label>
                         <label class="reported-info__form-label">
                         <h5 class="reported-info__form-title">Photos</h5>

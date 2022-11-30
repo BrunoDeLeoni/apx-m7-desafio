@@ -11,7 +11,8 @@ Pet.init({
     petLocation: DataTypes.STRING,
     petDescription: DataTypes.TEXT,
     petPhoto: DataTypes.STRING,
-    // petMap: DataTypes.ARRAY,
+    petMapLng: DataTypes.FLOAT,
+    petMapLat: DataTypes.FLOAT,
 },
 {
     sequelize,
