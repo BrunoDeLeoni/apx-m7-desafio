@@ -89,4 +89,9 @@ Versión 1.8
 *MapBox*
 * Almacena las mascotas con longitud y latitud
 
-
+Versión 1.9
+*MapBox*
+* Ahora busca la ubicación de las mascotas y la muestra en un mapa
+* BUG: No visibiliza el MAP de Reported-Info
+* BUG: Al visualizar la información de una mascota perdida despues genera problemas en el subscribe
+* BUG: Duplica la ultima card creada cuando traigo las mascotas perdidas o información añadida

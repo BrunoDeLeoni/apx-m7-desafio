@@ -1,6 +1,7 @@
 /* Imports */
 import { Router } from "@vaadin/router";
-import { state } from "../state"
+import { state } from "../state";
+import * as mapboxgl from "mapbox-gl";
 
 /* Variables */
 const style = document.createElement("style")
@@ -13,7 +14,6 @@ export class MyReportsInfoPage extends HTMLElement {
 
     /* Connected to Callback */
     connectedCallback(){
-        const currentState = state.getState()
 
         state.subscribe(() => {
             const currentState = state.getState()
@@ -26,6 +26,7 @@ export class MyReportsInfoPage extends HTMLElement {
             petPhoto = currentState.petPhoto,
             petSearch = state.searchActive(currentState.petActive),
             
+            /* BUG: Repite la carga de la ultima CARD */
             state.petMyReportsInfoAdd(currentState.petId)
             .then((item)=>{
                 const template: any = this.querySelector(".my-reports-info__info-div");
@@ -40,10 +41,46 @@ export class MyReportsInfoPage extends HTMLElement {
             
             this.render();
             
+            /* BUG: Carga el MAP pero al salir y querer volver ingresar o loguearse da ERR */
+            /* Hay que volver a cargar la Page */
+            this.map();
+            
         })
         
         this.render();
-
+            
+    }
+    
+    /* MapBox */
+    map(){
+        const MAPBOX_TOKEN = "pk.eyJ1IjoiYnJ1bm9kZWxlb25pIiwiYSI6ImNsOXRkaGpkcTA3amwzdWxnNG1xZ2ExbHAifQ.aod0t9q82plxaMoefaxnEQ";
+        /* MapBox: HTML */
+        const mapContainer: any = this.querySelector(".map-container");
+        mapContainer.innerHTML = 
+        `
+        <link href="//api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet"/>
+        <label class="my-reports-info__form-label">
+            <h5 class="my-reports-info__form-title">Map</h5>
+            <div class="my-reports-info__form-map pet-map" name="pet-map" id="map"></div>
+        </label>
+        `
+        /* MapBox: Mapa */
+        function initMap(){
+            mapboxgl.accessToken = MAPBOX_TOKEN;
+            return new mapboxgl.Map({
+                container: "map",
+                style: "mapbox://styles/mapbox/streets-v11",
+            })
+        }
+        /* MapBox: Run */
+        (()=>{
+            let map = initMap();
+            const marker = new mapboxgl.Marker()
+            .setLngLat([petMapLng, petMapLat])
+            .addTo(map)
+            map.setCenter([petMapLng, petMapLat]);
+            map.setZoom(14);
+        })();
     }
 
     addButtons(){
@@ -65,7 +102,6 @@ export class MyReportsInfoPage extends HTMLElement {
         back.addEventListener("click", ()=>{
             Router.go("/reports")
         })
-
     }
 
     render(){
@@ -99,10 +135,8 @@ export class MyReportsInfoPage extends HTMLElement {
                         <h5 class="my-reports-info__form-title">Description</h5>
                         <h4 class="my-reports-info__form-data pet-description">${petDescription}</h4>
                     </label>
-                    <label class="my-reports-info__form-label">
-                        <h5 class="my-reports-info__form-title">Map</h5>
-                        <div class="my-reports-info__form-map pet-map" name="pet-map"></div>
-                    </label>
+                    <div class="map-container">
+                    </div>
                     <label class="my-reports-info__form-label">
                         <h5 class="my-reports-info__form-title">Photos</h5>
                         <img class="my-reports-info__form-photo pet-photo" src="${petPhoto}">
@@ -281,6 +315,18 @@ export class MyReportsInfoPage extends HTMLElement {
             height: 5vh;
         }
 
+        .map-container{
+            width: 100%;
+        }
+        @media (min-width: 1024px){
+            .map-container{
+                width: 730px;
+            }
+        }
+
+        .mapboxgl-control-container{
+            display: none;
+        }
         `
         this.appendChild(style)
         this.addButtons();

@@ -29,6 +29,7 @@ export class MyReportsPage extends HTMLElement {
         `
 
         /* Add Items */
+        /* BUG: Repite la carga de la ultima CARD */
         state.petMyReports()
         .then((item)=>{
             const template: any = this.querySelector(".my-reports__body-box");

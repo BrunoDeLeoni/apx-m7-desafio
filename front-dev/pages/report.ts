@@ -20,8 +20,8 @@ export class ReportPage extends HTMLElement {
         /* MapBox */
         const MAPBOX_TOKEN = "pk.eyJ1IjoiYnJ1bm9kZWxlb25pIiwiYSI6ImNsOXRkaGpkcTA3amwzdWxnNG1xZ2ExbHAifQ.aod0t9q82plxaMoefaxnEQ";
         const mapboxClient = new MapboxClient(MAPBOX_TOKEN);
-        const mapContainer: any = this.querySelector(".map-container")
         /* MapBox: HTML */
+        const mapContainer: any = this.querySelector(".map-container")
         mapContainer.innerHTML = 
         `
         <link href="//api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet"/>
@@ -45,7 +45,7 @@ export class ReportPage extends HTMLElement {
             });
             return map
         }
-        /* MapBox: Busqueda por Nombre*/
+        /* MapBox: Search */
         function initSearchForm(callback) {
             const mapSearch: any = mapContainer.querySelector(".map-button")
             mapSearch.addEventListener("click", (e)=>{
@@ -63,8 +63,9 @@ export class ReportPage extends HTMLElement {
                     }
                 );
             });
-        }        /* MapBox: Run */
-        (()=>{
+        }        
+        /* MapBox: Function */
+        function map(){
             let map = initMap()
             initSearchForm((results)=>{
                 const firstResult = results[0];
@@ -76,8 +77,9 @@ export class ReportPage extends HTMLElement {
                 [lng, lat] = firstResult.geometry.coordinates
                 console.log(lng, lat)
             });
-        })();
-
+        }
+        /* MapBox: Run */
+        map();
 
         /* Upload Photo */
         let photo;
@@ -302,7 +304,20 @@ export class ReportPage extends HTMLElement {
                 width: 730px;
             }
         }
-
+        
+        .report__footer{
+            display: flex;
+            height: 5vh;
+        }
+        
+        .dz-details,
+        .dz-progress,
+        .dz-success-mark,
+        .dz-error-mark,
+        .dz-error-message{
+            display: none;
+        }
+        
         .map-container{
             width: 100%;
         }
@@ -311,19 +326,6 @@ export class ReportPage extends HTMLElement {
                 width: 730px;
             }
         }
-
-        .report__footer{
-            display: flex;
-            height: 5vh;
-        }
-
-        .dz-details,
-        .dz-progress,
-        .dz-success-mark,
-        .dz-error-mark,
-        .dz-error-message{
-            display: none;
-            }
 
         .mapboxgl-control-container{
             display: none;

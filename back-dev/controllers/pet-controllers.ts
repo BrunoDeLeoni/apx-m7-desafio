@@ -1,6 +1,7 @@
 /* Imports */
 import { Pet } from "../models"
 import { cloudinary } from "../lib/cloudinary"
+import { indexAlgolia } from "../lib/algolia"
 
 /* Pet: Crear una nueva mascota perdida */
 export async function petCreate(userId, data){
@@ -21,6 +22,16 @@ export async function petCreate(userId, data){
         petPhoto: image.secure_url,
         UserId: userId,
     })
+    const petNewIndexAlgolia = await indexAlgolia
+    .saveObject({
+        objectID: petNew.get("id"),
+        name: petName,
+        _geoloc: {
+            lng: petMapLng,
+            lat: petMapLat,
+        }
+    })
+    console.log(petNewIndexAlgolia)
     return petNew;
 }
 

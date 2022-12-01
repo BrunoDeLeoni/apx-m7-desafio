@@ -218,7 +218,9 @@ const state = {
             currentState.petBreed = data.petBreed,
             currentState.petLocation = data.petLocation,
             currentState.petPhoto = data.petPhoto,
-            currentState.petDescription = data.petDescription
+            currentState.petDescription = data.petDescription,
+            currentState.petMapLng = data.petMapLng,
+            currentState.petMapLat = data.petMapLat
             this.setState(currentState)
         })
     },
@@ -284,6 +286,8 @@ const state = {
             currentState.petPhoto = data.petPhoto,
             currentState.petLocation = data.petLocation,
             currentState.petDescription = data.petDescription,
+            currentState.petMapLng = data.petMapLng,
+            currentState.petMapLat = data.petMapLat,
             currentState.petEmail = data.User.userEmail
             this.setState(currentState)
         })

@@ -29,6 +29,7 @@ export class ReportedPage extends HTMLElement {
         `
 
         /* Add Items */
+        /* BUG: Repite la carga de la ultima CARD */
         state.petReported()
         .then((item)=>{
             const template: any = this.querySelector(".reported__body-box");
