@@ -95,3 +95,7 @@ Versión 1.9
 * BUG: No visibiliza el MAP de Reported-Info
 * BUG: Al visualizar la información de una mascota perdida despues genera problemas en el subscribe
 * BUG: Duplica la ultima card creada cuando traigo las mascotas perdidas o información añadida
+
+Versión 1.9.1
+*MapBox*
+* Se optimizo el codigo para su lectura

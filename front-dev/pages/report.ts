@@ -74,8 +74,6 @@ export class ReportPage extends HTMLElement {
                 .addTo(map)
                 map.setCenter(firstResult.geometry.coordinates);
                 map.setZoom(14);
-                [lng, lat] = firstResult.geometry.coordinates
-                console.log(lng, lat)
             });
         }
         /* MapBox: Run */

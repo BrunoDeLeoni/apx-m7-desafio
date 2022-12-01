@@ -54,10 +54,11 @@ export class ReportedInfoPage extends HTMLElement {
         /* MapBox: Mapa */
         function initMap(){
             mapboxgl.accessToken = MAPBOX_TOKEN;
-            return new mapboxgl.Map({
+            const map = new mapboxgl.Map({
                 container: "map",
                 style: "mapbox://styles/mapbox/streets-v11",
             })
+            return map;
         }
         /* MapBox: Run */
         (()=>{
@@ -67,6 +68,7 @@ export class ReportedInfoPage extends HTMLElement {
             .addTo(map)
             map.setCenter([petMapLng, petMapLat]);
             map.setZoom(14);
+            console.log("mapa")
         })();
     }
 
