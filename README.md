@@ -106,3 +106,7 @@ Versión 1.10
 * Ahora se envian notificaciones al mail del dueño de la mascota perdida con la informacion que se brindo por otro usuario.
 * BUG: Duplica la ultima card creada cuando traigo las mascotas perdidas o información añadida
 * BUG: problema en el 'subscribe' con referencia a MapBox
+
+Versión 1.10.1
+*SendGrid*
+* Se oculto el Key de SendGrid
