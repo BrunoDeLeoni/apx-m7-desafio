@@ -294,9 +294,9 @@ const state = {
     },
 
     /* Info: Añado informacion a mascota reportada */
-    petReportedInfoAdd(petAdd){
+    petReportedInfoAdd(petMsg){
         const currentState = this.getState();
-        currentState.petInfo = petAdd;
+        currentState.petInfo = petMsg;
         return fetch(API_BASE_URL + "/pet-reported-info-add", {
             method: 'POST',
             headers: {
@@ -342,6 +342,24 @@ const state = {
         })
         .then((data)=>{
             return true
+        })
+    },
+
+    /* Info: Envio de Email de notificación */
+    sendEmail(){
+        const currentState = this.getState();
+        return fetch(API_BASE_URL + "/send-email", {
+            method: 'POST',
+            headers: {
+                "content-type": "application/json",
+                Authorization: `brearer ${currentState.token}`,
+            },
+            body: JSON.stringify(
+                currentState
+            )
+        })
+        .then((data)=>{
+            return data
         })
     },
 

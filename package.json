@@ -9,6 +9,7 @@
     "nodemon": "^2.0.20"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
     "@vaadin/router": "^1.7.4",
     "algoliasearch": "^4.14.2",
     "cloudinary": "^1.32.0",

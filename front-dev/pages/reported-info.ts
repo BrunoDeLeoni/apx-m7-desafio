@@ -30,7 +30,8 @@ export class ReportedInfoPage extends HTMLElement {
             /* BUG: No visibiliza el MAP */
             /* BUG: Carga el MAP pero al salir y querer volver ingresar o loguearse da ERR */
             /* Hay que volver a cargar la Page */
-            this.map();
+            // this.map();
+            console.log("mapa")
             
         })
 
@@ -68,7 +69,6 @@ export class ReportedInfoPage extends HTMLElement {
             .addTo(map)
             map.setCenter([petMapLng, petMapLat]);
             map.setZoom(14);
-            console.log("mapa")
         })();
     }
 
@@ -97,6 +97,8 @@ export class ReportedInfoPage extends HTMLElement {
             console.log("Enviando información")
             state.petReportedInfoAdd(e.target["info"].value)
             .then(()=>{
+                console.log("Pre-Información Enviada")
+                state.sendEmail()
                 console.log("Información enviada")
                 boxInfo.style.display = "none"
                 Router.go("/reported")

@@ -43,7 +43,8 @@ export class MyReportsInfoPage extends HTMLElement {
             
             /* BUG: Carga el MAP pero al salir y querer volver ingresar o loguearse da ERR */
             /* Hay que volver a cargar la Page */
-            this.map();
+            // this.map();
+            console.log("mapa")
             
         })
         

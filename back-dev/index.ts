@@ -1,8 +1,9 @@
 /* Imports */
 import { userCreate, userAuth, userData, userUpdate } from "./controllers/user-controllers";
 import { petCreate, petVisit, petMyReports, petReported, changeSearch } from "./controllers/pet-controllers";
-import { petMyReportsInfo, petReportedInfo, petReportedInfoAdd, petMyReportsInfoAdd } from "./controllers/info-controllers";
+import { petMyReportsInfo, petReportedInfo, petReportedInfoAdd, petMyReportsInfoAdd, sendEmail } from "./controllers/info-controllers";
 import { User, Auth, Pet, Info } from "./models";
+import { sgMail } from "./lib/sendgrid";
 import * as express from "express";
 import * as path from "path";
 import * as jwt from "jsonwebtoken";
@@ -256,6 +257,22 @@ app.put("/change-search", async (req, res) => {
         res.status(401).json({ error: e})
     }
 })
+
+/* Info: Envia un Email con Notificación */
+app.post("/send-email", async (req, res) => {
+    if(!req.body){
+        res.status(400).json({
+            message: "Not Data"
+        })
+    }
+    const response = await sendEmail(req.body.petInfo, req.body.petEmail)
+    try{
+        res.json(response)
+    }
+    catch (e){
+        res.status(401).json({ error: e})
+    }
+});
 
 /* Web - Home */
 app.get("*", (req, res) => {

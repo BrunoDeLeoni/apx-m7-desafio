@@ -1,5 +1,6 @@
 /* Imports */
 import { User, Pet, Info } from "../models"
+import { sgMail } from "../lib/sendgrid"
 
 /* Info: Mascota que reporte */
 export async function petMyReportsInfo(petId){
@@ -35,4 +36,24 @@ export async function petReportedInfoAdd(userId, body){
         PetId: petId,
     })
     return petInfoNew
+}
+
+/* Info: Enviar Email con Notificación */
+export async function sendEmail(info, email){
+    const msg = {
+        to: email, 
+        from: 'webapp.notificaciones@gmail.com',
+        subject: 'Notification / ¿Where is my dog?',
+        text: 'Tienes nueva información sobre tu mascota: ' + info,
+        html: '<strong>Tienes nueva información sobre tu mascota: </strong>' + info,
+    }
+    console.log(msg)
+    sgMail
+    .send(msg)
+    .then(() => {
+        return true
+    })
+    .catch((e) => {
+        console.error(e)
+    })
 }

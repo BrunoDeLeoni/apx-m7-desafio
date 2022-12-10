@@ -99,3 +99,10 @@ Versión 1.9
 Versión 1.9.1
 *MapBox*
 * Se optimizo el codigo para su lectura
+
+Versión 1.10
+*SendGrid*
+* Se pauso el uso de MapBox por Bug en el 'subscribe'
+* Ahora se envian notificaciones al mail del dueño de la mascota perdida con la informacion que se brindo por otro usuario.
+* BUG: Duplica la ultima card creada cuando traigo las mascotas perdidas o información añadida
+* BUG: problema en el 'subscribe' con referencia a MapBox
