@@ -114,3 +114,7 @@ Versión 1.10.1
 Versión 1.10.2
 *SendGrid*
 * Se cambio la Key de SendGrid
+
+Versión 1.10.3
+*Env*
+* Se borro el archivo '.env'
