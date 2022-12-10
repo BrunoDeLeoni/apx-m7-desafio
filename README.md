@@ -110,3 +110,7 @@ Versión 1.10
 Versión 1.10.1
 *SendGrid*
 * Se oculto el Key de SendGrid
+
+Versión 1.10.2
+*SendGrid*
+* Se cambio la Key de SendGrid
