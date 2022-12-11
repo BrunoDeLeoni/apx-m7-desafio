@@ -98,7 +98,7 @@ const state = {
             method: 'GET',
             headers: {
                 "content-type": "application/json",
-                Authorization: `brearer ${token}`,
+                Authorization: `bearer ${token}`,
             }
         })
         .then((res) => {
@@ -120,7 +120,7 @@ const state = {
             method: 'PUT',
             headers: {
                 "content-type": "application/json",
-                Authorization: `brearer ${token}`,
+                Authorization: `bearer ${token}`,
             },
             body: JSON.stringify(
                 dataUser
@@ -145,7 +145,7 @@ const state = {
             method: 'POST',
             headers: {
                 "content-type": "application/json",
-                Authorization: `brearer ${token}`,
+                Authorization: `bearer ${token}`,
             },
             body: JSON.stringify(
                 petInfo
@@ -185,7 +185,7 @@ const state = {
             method: 'GET',
             headers: {
                 "content-type": "application/json",
-                Authorization: `brearer ${token}`,
+                Authorization: `bearer ${token}`,
             }
         })
         .then((res) => {
@@ -232,7 +232,7 @@ const state = {
             method: 'POST',
             headers: {
                 "content-type": "application/json",
-                Authorization: `brearer ${currentState.token}`
+                Authorization: `bearer ${currentState.token}`
             },
             body: JSON.stringify(
                 currentState
@@ -301,7 +301,7 @@ const state = {
             method: 'POST',
             headers: {
                 "content-type": "application/json",
-                Authorization: `brearer ${currentState.token}`,
+                Authorization: `bearer ${currentState.token}`,
             },
             body: JSON.stringify(
                 currentState
@@ -331,7 +331,7 @@ const state = {
             method: 'put',
             headers: {
                 "content-type": "application/json",
-                Authorization: `brearer ${currentState.token}`,
+                Authorization: `bearer ${currentState.token}`,
             },
             body: JSON.stringify(
                 currentState
@@ -352,7 +352,7 @@ const state = {
             method: 'POST',
             headers: {
                 "content-type": "application/json",
-                Authorization: `brearer ${currentState.token}`,
+                Authorization: `bearer ${currentState.token}`,
             },
             body: JSON.stringify(
                 currentState

@@ -41,7 +41,7 @@ export class ReportedInfoPage extends HTMLElement {
 
     /* MapBox */
     map(){
-        const MAPBOX_TOKEN = "pk.eyJ1IjoiYnJ1bm9kZWxlb25pIiwiYSI6ImNsOXRkaGpkcTA3amwzdWxnNG1xZ2ExbHAifQ.aod0t9q82plxaMoefaxnEQ";
+        const MAPBOX_TOKEN = process.env.TOKEN_MAPBOX;
         /* MapBox: HTML */
         const mapContainer: any = this.querySelector(".map-container");
         mapContainer.innerHTML = 

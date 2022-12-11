@@ -123,3 +123,7 @@ Versión 1.11
 *env*
 * Corrección final de Key's y reactivación de SendGrid
 
+Versión 1.12
+*Auth*
+* Corrección de Auth => 'bearer'
+* Corrección de Token => 'mapbox'
