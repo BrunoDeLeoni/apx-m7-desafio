@@ -4,11 +4,11 @@ import { Sequelize } from "sequelize";
 /* Sequelize */
 const sequelize = new Sequelize({
     dialect: "postgres",
-    username: process.env.CONNECTION_USER || "apx_bruno_m7_desafio_user",
-    password: process.env.CONNECTION_PASS || "WN8zlvNJJmkWarL3FStr7OQDRTey9x1g",
-    database: process.env.CONNECTION_DATABASE || "apx_bruno_m7_desafio",
+    username: process.env.CONNECTION_USER,
+    password: process.env.CONNECTION_PASS,
+    database: process.env.CONNECTION_DATABASE,
     port: 5432,
-    host: process.env.CONNECTION_HOST || "dpg-cdijmjqen0hi0cof41i0-a.oregon-postgres.render.com",
+    host: process.env.CONNECTION_HOST,
     ssl: true,
     dialectOptions: {
         ssl: {
