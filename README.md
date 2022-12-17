@@ -133,3 +133,7 @@ Versión 1.12.1
 * Habilitación del Maps para visualizar los errores
 * Comentado de errores en el codigo
 
+Versión 1.12.2
+*Code*
+* Correccion de comentado de errores en el codigo
+
