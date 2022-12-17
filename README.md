@@ -127,3 +127,9 @@ Versión 1.12
 *Auth*
 * Corrección de Auth => 'bearer'
 * Corrección de Token => 'mapbox'
+
+Versión 1.12.1
+*Code*
+* Habilitación del Maps para visualizar los errores
+* Comentado de errores en el codigo
+

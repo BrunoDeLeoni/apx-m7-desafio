@@ -3,7 +3,6 @@ import { userCreate, userAuth, userData, userUpdate } from "./controllers/user-c
 import { petCreate, petVisit, petMyReports, petReported, changeSearch } from "./controllers/pet-controllers";
 import { petMyReportsInfo, petReportedInfo, petReportedInfoAdd, petMyReportsInfoAdd, sendEmail } from "./controllers/info-controllers";
 import { User, Auth, Pet, Info } from "./models";
-import { sgMail } from "./lib/sendgrid";
 import * as express from "express";
 import * as path from "path";
 import * as jwt from "jsonwebtoken";

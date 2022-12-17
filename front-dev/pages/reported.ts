@@ -29,7 +29,7 @@ export class ReportedPage extends HTMLElement {
         `
 
         /* Add Items */
-        /* BUG: Repite la carga de la ultima CARD */
+        /* BUG: Al cargar los archivos en la base de datos me repite el ultimo item */
         state.petReported()
         .then((item)=>{
             const template: any = this.querySelector(".reported__body-box");

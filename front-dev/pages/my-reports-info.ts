@@ -41,14 +41,16 @@ export class MyReportsInfoPage extends HTMLElement {
             
             this.render();
             
-            /* BUG: Carga el MAP pero al salir y querer volver ingresar o loguearse da ERR */
-            /* Hay que volver a cargar la Page */
-            // this.map();
+            /* BUG: Al ejecutarse el 'subscribe' donde se ejecuta 'map()' por primera vez
+            todo funciona normal, pero al querer volver a entrar a alguna pesataña de una mascota
+            perdida o cierro y vuelvo a iniciar sessión me genera un error y
+            no me deja avanzar */
             console.log("mapa")            
+            this.map();
         })
         
         this.render();
-            
+        
     }
     
     /* MapBox */
@@ -106,7 +108,6 @@ export class MyReportsInfoPage extends HTMLElement {
     }
 
     render(){
-
         this.className = "my-reports-info"
         this.innerHTML = 
         `
