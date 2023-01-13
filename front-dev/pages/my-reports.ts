@@ -15,6 +15,7 @@ export class MyReportsPage extends HTMLElement {
         this.render()
         
         /* List Item */
+        /* BUG: Solo me deja clickear el 'ver mas...' de la ultima tarjeta (*repetida) */
         const list: any = this.querySelector(".my-reports__body")
         list.innerHTML = 
         `

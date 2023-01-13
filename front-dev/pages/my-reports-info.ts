@@ -26,8 +26,8 @@ export class MyReportsInfoPage extends HTMLElement {
             petPhoto = currentState.petPhoto,
             petSearch = state.searchActive(currentState.petActive),
             
-        /* BUG: Al cargar los archivos en la base de datos me repite el ultimo item */
-        state.petMyReportsInfoAdd(currentState.petId)
+            /* BUG: Al cargar los archivos en la base de datos me repite el ultimo item */
+            state.petMyReportsInfoAdd(currentState.petId)
             .then((item)=>{
                 const template: any = this.querySelector(".my-reports-info__info-div");
                 const container: any = this.querySelector(".my-reports-info__info");

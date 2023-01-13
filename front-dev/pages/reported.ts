@@ -15,6 +15,7 @@ export class ReportedPage extends HTMLElement {
         this.render()
 
         /* List Item */
+        /* BUG: Solo me deja clickear el 'ver mas...' de la ultima tarjeta (*repetida) */
         const list: any = this.querySelector(".reported__body")
         list.innerHTML = 
         `
