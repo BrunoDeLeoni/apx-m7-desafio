@@ -46,7 +46,7 @@ export class MyReportsInfoPage extends HTMLElement {
             perdida o cierro y vuelvo a iniciar sessión me genera un error y
             no me deja avanzar */
             console.log("mapa")            
-            this.map();
+            // this.map();
         })
         
         this.render();
