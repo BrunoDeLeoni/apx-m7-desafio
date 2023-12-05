@@ -6,10 +6,10 @@
   "author": "Bruno De Leoni",
   "license": "MIT",
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "nodemon": "^3.0.2"
   },
   "dependencies": {
-    "@sendgrid/mail": "^7.7.0",
+    "@sendgrid/mail": "^8.0.0",
     "@vaadin/router": "^1.7.4",
     "algoliasearch": "^4.14.2",
     "cloudinary": "^1.32.0",
@@ -17,7 +17,7 @@
     "dotenv": "^16.0.3",
     "dropzone": "^6.0.0-beta.2",
     "express": "^4.18.2",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "mapbox-gl": "^2.11.0",
     "parcel": "^2.7.0",

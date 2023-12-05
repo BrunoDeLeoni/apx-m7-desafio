@@ -137,3 +137,7 @@ Versión 1.12.2
 *Code*
 * Correccion de comentado de errores en el codigo
 
+Versión 2.0
+*Return*
+* Actualización
+
